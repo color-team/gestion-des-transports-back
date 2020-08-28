@@ -1,4 +1,5 @@
-FROM openjdk:11-jdk
-ARG JAR_FILE=target/*.jar
-COPY target/back.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+FROM mysql
+ENV MYSQL_DATABASE transports-db
+ENV MYSQL_ROOT_PASSWORD root
+ENV MYSQL_USER root
+COPY init_db.sql /docker-entrypoint-initdb.d
