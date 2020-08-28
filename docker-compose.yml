@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+    transports-db:
+        image: maloft/transports-bd
+        container_name: transports-db
+        networks:
+            - transports-network
+        volumes:
+            - transports-db-data:/var/lib/postgresql
+
+    articles-back:
+        image: koulkzbda/transports-back
+        container_name: transports-back
+        depends_on:
+            - transports-db
+        ports:
+            - "9000:8080"
+        networks:
+            - transports-network
+            
+    articles-front:
+        image: souley313/transports-front
+        container_name: transports-front
+        depends_on:
+            - transports-back
+        ports:
+            - "4201:80"
+        networks:
+            - transports-network
+            
+    adminer:
+        image: adminer
+        ports:
+            - "8181:8080"
+        depends_on:
+            -transports-db
+
+networks:
+    transports-network:
+
+volumes:
+    transports-db-data:
