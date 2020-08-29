@@ -1,6 +1,6 @@
-package dev.controller.vm;
+package dev.controller.dto;
 
-import dev.domain.Collegue;
+import dev.domain.Utilisateur;
 import dev.domain.Role;
 
 import java.util.ArrayList;
@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Structure modèlisant un collègue servant à communiquer avec l'extérieur (WEB API).
+ * Structure modèlisant un utilisateur servant à communiquer avec l'extérieur (WEB API).
  */
-public class CollegueVM {
+public class UtilisateurDto {
 
     private String email;
     private String nom;
     private String prenom;
     private List<Role> roles = new ArrayList<>();
 
-    public CollegueVM(Collegue col) {
-        this.email = col.getEmail();
-        this.nom = col.getNom();
-        this.prenom = col.getPrenom();
-        this.roles = col.getRoles().stream().map(roleCollegue -> roleCollegue.getRole()).collect(Collectors.toList());
+    public UtilisateurDto(Utilisateur user) {
+        this.email = user.getEmail();
+        this.nom = user.getNom();
+        this.prenom = user.getPrenom();
+        this.roles = user.getRoles().stream().map(roleUtilisateur -> roleUtilisateur.getRole()).collect(Collectors.toList());
     }
 
     public String getEmail() {
