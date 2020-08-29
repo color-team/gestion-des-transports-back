@@ -53,8 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService(DataSource ds) {
         JdbcUserDetailsManager manager = new JdbcUserDetailsManager();
         manager.setDataSource(ds);
-        manager.setUsersByUsernameQuery("select email, mot_de_passe, 'true' from collegue where email=?");
-        manager.setAuthoritiesByUsernameQuery("select c.email, rc.role from collegue c, role_collegue rc where c.id=rc.collegue_id and c.email=?");
+        manager.setUsersByUsernameQuery("select email, mot_de_passe, 'true' from utilisateur where email=?");
+        manager.setAuthoritiesByUsernameQuery("select c.email, rc.role from utilisateur c, role_utilisateur rc where c.id=rc.utilisateur_id and c.email=?");
         return manager;
     }
 
@@ -74,7 +74,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 .and()
                 // toutes les requêtes doivent être authentifiées
-                .authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/administrateur/**").hasRole("ADMINISTRATEUR")
+                .antMatchers("/chauffeur/**").hasRole("CHAUFFEUR")
+                .antMatchers("/collaborateur/**").hasRole("COLLABORATEUR")
+                .anyRequest().authenticated()
                 .and()
                 // génération d'un formulaire de login
                 // il faut produire une requête avec les caractéristiques suivantes :

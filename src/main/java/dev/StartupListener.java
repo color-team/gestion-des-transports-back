@@ -1,10 +1,10 @@
 package dev;
 
-import dev.domain.Collegue;
+import dev.domain.Utilisateur;
 import dev.domain.Role;
-import dev.domain.RoleCollegue;
+import dev.domain.RoleUtilisateur;
 import dev.domain.Version;
-import dev.repository.CollegueRepo;
+import dev.repository.UtilisateurRepo;
 import dev.repository.VersionRepo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,36 +24,44 @@ public class StartupListener {
     private String appVersion;
     private VersionRepo versionRepo;
     private PasswordEncoder passwordEncoder;
-    private CollegueRepo collegueRepo;
+    private UtilisateurRepo utilisateurRepo;
 
-    public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, CollegueRepo collegueRepo) {
+    public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, UtilisateurRepo utilisateurRepo) {
         this.appVersion = appVersion;
         this.versionRepo = versionRepo;
         this.passwordEncoder = passwordEncoder;
-        this.collegueRepo = collegueRepo;
+        this.utilisateurRepo = utilisateurRepo;
     }
 
     @EventListener(ContextRefreshedEvent.class)
     public void onStart() {
         this.versionRepo.save(new Version(appVersion));
 
-        // Création de deux utilisateurs
+        // Création de trois utilisateurs
 
-        Collegue col1 = new Collegue();
-        col1.setNom("Admin");
-        col1.setPrenom("DEV");
-        col1.setEmail("admin@dev.fr");
-        col1.setMotDePasse(passwordEncoder.encode("superpass"));
-        col1.setRoles(Arrays.asList(new RoleCollegue(col1, Role.ROLE_ADMINISTRATEUR), new RoleCollegue(col1, Role.ROLE_UTILISATEUR)));
-        this.collegueRepo.save(col1);
+        Utilisateur user1 = new Utilisateur();
+        user1.setNom("Admin");
+        user1.setPrenom("DEV");
+        user1.setEmail("admin@dev.fr");
+        user1.setMotDePasse(passwordEncoder.encode("superpass"));
+        user1.setRoles(Arrays.asList(new RoleUtilisateur(user1, Role.ROLE_ADMINISTRATEUR), new RoleUtilisateur(user1, Role.ROLE_COLLABORATEUR), new RoleUtilisateur(user1, Role.ROLE_CHAUFFEUR)));
+        this.utilisateurRepo.save(user1);
 
-        Collegue col2 = new Collegue();
-        col2.setNom("User");
-        col2.setPrenom("DEV");
-        col2.setEmail("user@dev.fr");
-        col2.setMotDePasse(passwordEncoder.encode("superpass"));
-        col2.setRoles(Arrays.asList(new RoleCollegue(col2, Role.ROLE_UTILISATEUR)));
-        this.collegueRepo.save(col2);
+        Utilisateur user2 = new Utilisateur();
+        user2.setNom("User");
+        user2.setPrenom("DEV");
+        user2.setEmail("user@dev.fr");
+        user2.setMotDePasse(passwordEncoder.encode("superpass"));
+        user2.setRoles(Arrays.asList(new RoleUtilisateur(user2, Role.ROLE_COLLABORATEUR)));
+        this.utilisateurRepo.save(user2);
+        
+        Utilisateur user3 = new Utilisateur();
+        user3.setNom("Driver");
+        user3.setPrenom("DEV");
+        user3.setEmail("driver@dev.fr");
+        user3.setMotDePasse(passwordEncoder.encode("superpass"));
+        user3.setRoles(Arrays.asList(new RoleUtilisateur(user3, Role.ROLE_COLLABORATEUR), new RoleUtilisateur(user3, Role.ROLE_CHAUFFEUR)));
+        this.utilisateurRepo.save(user3);
     }
 
 }
