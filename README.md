@@ -18,4 +18,8 @@ mvn spring-boot:run
 
 ## Déploiement Heroku
 
+L'API est disponible à l'adresse suivante :
+
+https://gestion-des-transports-back.herokuapp.com/
+
 
