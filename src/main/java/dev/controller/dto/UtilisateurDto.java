@@ -1,7 +1,7 @@
 package dev.controller.dto;
 
 import dev.domain.Utilisateur;
-import dev.domain.Role;
+import dev.domain.enumeration.Role;
 
 import java.util.ArrayList;
 import java.util.List;

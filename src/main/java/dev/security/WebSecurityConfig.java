@@ -92,8 +92,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //     => la génération d'un jeton JWT
                 //     => la pause d'un cookie d'authentification
                 .successHandler(jwtAuthenticationSuccessHandler)
-                // en cas d'echec, code 400 envoyé
-                .failureHandler((request, response, exception) -> response.setStatus(HttpServletResponse.SC_BAD_REQUEST))
+                // en cas d'echec, code 403 envoyé
+                .failureHandler((request, response, exception) -> response.setStatus(HttpServletResponse.SC_FORBIDDEN))
                 // la requête POST /login n'est pas soumise à authentification
                 .permitAll()
                 .and()

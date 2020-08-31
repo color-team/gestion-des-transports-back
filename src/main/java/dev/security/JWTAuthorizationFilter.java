@@ -1,10 +1,20 @@
 package dev.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,16 +23,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureException;
 
 /**
  * Filtre permettant de passer du jeton JWT à un utilisateur connecté au sens Spring Security.
@@ -56,6 +61,10 @@ public class JWTAuthorizationFilter  extends OncePerRequestFilter {
 
                             Authentication authentication =  new UsernamePasswordAuthenticationToken(username, null, roles);
                             SecurityContextHolder.getContext().setAuthentication(authentication);
+                        } catch (ExpiredJwtException e) {
+                            System.out.println(" Token expired ");
+                        } catch (SignatureException e) {
+                        	LOGGER.error("Erreur de signature ", e);
                         } catch (JwtException e) {
                             // En cas d'erreur de lecture du jeton, la requête n'est pas authentifiée et n'aura pas accès aux ressources sécurisées
                             LOGGER.error("Erreur de lecture du jeton JWT", e);
