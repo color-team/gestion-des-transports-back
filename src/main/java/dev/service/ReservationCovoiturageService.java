@@ -20,8 +20,8 @@ public class ReservationCovoiturageService {
 		this.reservationCovoiturageRepo = reservationCovoiturageRepo;
 	}
 	
-	public List<ReservationCovoiturage> findAll() {
-		return reservationCovoiturageRepo.findAll();
+	public List<ReservationCovoiturageDto> findAll() {
+		return reservationCovoiturageRepo.findAll().stream().map(reservationCovoiturage -> ReservationCovoiturageMapper.toDto(reservationCovoiturage)).collect(Collectors.toList());
 	}
 
 //	@Transactional

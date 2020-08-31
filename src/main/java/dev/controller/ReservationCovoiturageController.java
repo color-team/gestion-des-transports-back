@@ -28,8 +28,8 @@ public class ReservationCovoiturageController {
 
 	// GET /reservationsCovoiturage
 	@GetMapping
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
+	public ResponseEntity<List<ReservationCovoiturageDto>> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 
 	// GET /reservationsCovoiturage/matricule
