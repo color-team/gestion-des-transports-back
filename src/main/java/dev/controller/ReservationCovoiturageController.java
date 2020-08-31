@@ -15,7 +15,7 @@ import dev.domain.ReservationCovoiturage;
 import dev.service.ReservationCovoiturageService;
 
 @RestController
-@RequestMapping("/reservationsCovoiturage")
+@RequestMapping("/reservations-covoiturage")
 @Secured("ROLE_COLLABORATEUR")
 public class ReservationCovoiturageController {
 
@@ -26,19 +26,19 @@ public class ReservationCovoiturageController {
 		this.service = service;
 	}
 
-	// GET /reservationsCovoiturage
+	// GET /reservations-covoiturage
 	@GetMapping
 	public ResponseEntity<List<ReservationCovoiturageDto>> findAll() {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
 	}
 
-	// GET /reservationsCovoiturage/matricule
+	// GET /reservations-covoiturage/matricule
 	@GetMapping("/{matricule}")
 	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
 	}
 
-	// POST /reservationsCovoiturage
+	// POST /reservations-covoiturage
 //	@PostMapping
 //	public ResponseEntity<?> create(@RequestBody @Valid ReservationCovoiturageDto reservationCovoiturageDto,
 //			BindingResult result) {
