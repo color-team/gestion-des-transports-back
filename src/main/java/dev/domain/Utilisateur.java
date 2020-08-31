@@ -8,20 +8,53 @@ public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
-    private String nom;
+    protected String nom;
 
-    private String prenom;
+    protected String prenom;
 
-    private String email;
+    protected String email;
 
-    private String motDePasse;
+    protected String motDePasse;
+    
+    protected String matricule;
 
-    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.PERSIST)
-    private List<RoleUtilisateur> roles;
+    @OneToMany(mappedBy = "utilisateur")
+    protected List<RoleUtilisateur> roles;
+    
+    @OneToMany(mappedBy = "conducteur")
+    protected List<ReservationCovoiturage> annoncesCovoiturage;
+    
+    @OneToMany(mappedBy = "chauffeur")
+    protected List<ReservationChauffeur> courses;
+    
+    @OneToMany(mappedBy = "passager")
+    protected List<ReservationChauffeur> reservationsChauffeur;
+    
+    @OneToMany(mappedBy = "conducteur")
+    protected List<ReservationSansChauffeur> reservationsSansChauffeur;
+    
+    @ManyToMany(mappedBy = "passagers")
+    protected List<ReservationCovoiturage> reservationsCovoiturage;
 
-    public Long getId() {
+    public Utilisateur() {}
+    
+    public Utilisateur(String nom, String prenom, String email, String motDePasse, String matricule,
+			List<RoleUtilisateur> roles) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.matricule = matricule;
+		this.roles = roles;
+	}
+    
+    public String getInfos() {
+    	return prenom + " " + nom.toUpperCase();
+    }
+
+	public Long getId() {
         return id;
     }
 
@@ -68,4 +101,52 @@ public class Utilisateur {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
+	public String getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
+	}
+
+	public List<ReservationCovoiturage> getAnnoncesCovoiturage() {
+		return annoncesCovoiturage;
+	}
+
+	public void setAnnoncesCovoiturage(List<ReservationCovoiturage> annoncesCovoiturage) {
+		this.annoncesCovoiturage = annoncesCovoiturage;
+	}
+
+	public List<ReservationChauffeur> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<ReservationChauffeur> courses) {
+		this.courses = courses;
+	}
+
+	public List<ReservationChauffeur> getReservationsChauffeur() {
+		return reservationsChauffeur;
+	}
+
+	public void setReservationsChauffeur(List<ReservationChauffeur> reservationsChauffeur) {
+		this.reservationsChauffeur = reservationsChauffeur;
+	}
+
+	public List<ReservationSansChauffeur> getReservationsSansChauffeur() {
+		return reservationsSansChauffeur;
+	}
+
+	public void setReservationsSansChauffeur(List<ReservationSansChauffeur> reservationsSansChauffeur) {
+		this.reservationsSansChauffeur = reservationsSansChauffeur;
+	}
+
+	public List<ReservationCovoiturage> getReservationsCovoiturage() {
+		return reservationsCovoiturage;
+	}
+
+	public void setReservationsCovoiturage(List<ReservationCovoiturage> reservationsCovoiturage) {
+		this.reservationsCovoiturage = reservationsCovoiturage;
+	}
 }

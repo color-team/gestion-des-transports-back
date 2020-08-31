@@ -1,6 +1,15 @@
 package dev.domain;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import dev.domain.enumeration.Role;
 
 @Entity
 public class RoleUtilisateur {
@@ -9,8 +18,7 @@ public class RoleUtilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "utilisateur_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Utilisateur utilisateur;
 
     @Enumerated(EnumType.STRING)
