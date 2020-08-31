@@ -3,6 +3,8 @@ package dev;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -27,6 +29,7 @@ import dev.repository.VersionRepo;
  * Insertion de jeux de données.
  */
 @Component
+@Transactional
 public class StartupListener {
 
     private String appVersion;
@@ -120,9 +123,9 @@ public class StartupListener {
         //  Création de réservationCovoiturage
         ReservationCovoiturage covoit1 = new ReservationCovoiturage(LocalDateTime.of(2020,9,17,9,10), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Marseille-St-Charles, Marseille", "Marseille", 13000, 43.3f , 5.4f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers1) );
         this.reservationCovoiturageRepository.save(covoit1);
-//        
-//        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
-//        this.reservationCovoiturageRepository.save(covoit2);
+        
+        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
+        this.reservationCovoiturageRepository.save(covoit2);
         
     }
 

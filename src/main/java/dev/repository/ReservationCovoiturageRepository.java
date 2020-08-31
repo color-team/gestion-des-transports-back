@@ -12,7 +12,10 @@ import dev.domain.ReservationCovoiturage;
 public interface ReservationCovoiturageRepository extends JpaRepository<ReservationCovoiturage, Long> {
 
 	@Query("select r from ReservationCovoiturage r join r.passagers p where p.matricule = :matricule")
-	List<ReservationCovoiturage> findByUtilisateurMatricule(@Param("matricule") String matricule);
+	List<ReservationCovoiturage> findByPassagerMatricule(@Param("matricule") String matricule);
+	
+	@Query("select r from ReservationCovoiturage r join r.conducteur c where c.matricule = :matricule")
+	List<ReservationCovoiturage> findByConducteurMatricule(@Param("matricule") String matricule);
 
 	List<ReservationCovoiturage> findByDateDepartAfter(LocalDateTime now);
 	
