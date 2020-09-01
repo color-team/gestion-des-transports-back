@@ -27,9 +27,14 @@ public class ReservationCovoiturageController {
 	}
 
 	// GET /reservations-covoiturage
-	@GetMapping
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+	@GetMapping("/present")
+	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
+	}
+	
+	@GetMapping("/past")
+	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInPast() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInPast());
 	}
 
 	// GET /reservations-covoiturage/matricule

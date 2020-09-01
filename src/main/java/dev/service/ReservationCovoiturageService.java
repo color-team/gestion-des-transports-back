@@ -41,5 +41,11 @@ public class ReservationCovoiturageService {
 		
 		return reservationsCovoiturage.stream().map(reservationCovoiturage -> ReservationCovoiturageMapper.toDto(reservationCovoiturage)).collect(Collectors.toList());
 	}
+	
+	public List<ReservationCovoiturageDto> findAllInPast() {
+		List<ReservationCovoiturage> reservationsCovoiturage = reservationCovoiturageRepo.findByDateDepartBefore(LocalDateTime.now());
+		
+		return reservationsCovoiturage.stream().map(reservationCovoiturage -> ReservationCovoiturageMapper.toDto(reservationCovoiturage)).collect(Collectors.toList());
+	}
 
 }

@@ -19,4 +19,6 @@ public interface ReservationCovoiturageRepository extends JpaRepository<Reservat
 
 	List<ReservationCovoiturage> findByDateDepartAfter(LocalDateTime now);
 	
+	List<ReservationCovoiturage> findByDateDepartBefore(LocalDateTime now);
+	
 }
