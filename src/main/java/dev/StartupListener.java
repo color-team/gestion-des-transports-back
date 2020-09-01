@@ -127,6 +127,9 @@ public class StartupListener {
         ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
         this.reservationCovoiturageRepository.save(covoit2);
         
+        ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
+        this.reservationCovoiturageRepository.save(covoit3);
+        
     }
 
 }
