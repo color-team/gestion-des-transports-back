@@ -121,16 +121,19 @@ public class StartupListener {
         
         //  Création d'un véhicule particulier
         ReservationCovoituragePassager reservationsCovoituragePassagers1a = new ReservationCovoituragePassager(user5, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
-//        ReservationCovoituragePassager reservationsCovoituragePassagers1b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
-//        ReservationCovoituragePassager[] reservationsCovoituragePassagers1 = {reservationsCovoituragePassagers1a, reservationsCovoituragePassagers1b};
-//        
-//        ReservationCovoituragePassager reservationsCovoituragePassagers2a = new ReservationCovoituragePassager(user8, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
-//        ReservationCovoituragePassager reservationsCovoituragePassagers2b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
-//        ReservationCovoituragePassager[] reservationsCovoituragePassagers2 = {reservationsCovoituragePassagers2a, reservationsCovoituragePassagers2b};
+        ReservationCovoituragePassager reservationsCovoituragePassagers1b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers1 = {reservationsCovoituragePassagers1a, reservationsCovoituragePassagers1b};
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers2a = new ReservationCovoituragePassager(user8, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers2b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers2 = {reservationsCovoituragePassagers2a, reservationsCovoituragePassagers2b};
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers3a = new ReservationCovoituragePassager(user8, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers3b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers3 = {reservationsCovoituragePassagers3a, reservationsCovoituragePassagers3b};
         VehiculeParticulier vehiculeParticulier1 = new VehiculeParticulier("AKG-666-69", "Ford", "https://images.caradisiac.com/logos/4/0/6/1/254061/S8-nouvelle-ford-focus-st-prix-agressif-mais-malus-eleve-176166.jpg", null, "Focus", "Berline");
         
         //  Création de réservationCovoiturage
-        ReservationCovoituragePassager[] listeReservationCovoituragePassager = {new ReservationCovoituragePassager()};
         ReservationCovoiturage covoit1 = new ReservationCovoiturage(
         		LocalDateTime.of(2020,9,17,9,10),
         		new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f),
@@ -138,24 +141,22 @@ public class StartupListener {
         		user2,
         		(byte) 4,
         		vehiculeParticulier1,
-        		Arrays.asList(listeReservationCovoituragePassager)
+        		Arrays.asList(reservationsCovoituragePassagers1)
         );
-//        covoit1.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit1);
-//        covoit1.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit1);
+        covoit1.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit1);
+        covoit1.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit1);
         this.reservationCovoiturageRepository.save(covoit1);
-        reservationsCovoituragePassagers1a.setReservationCovoiturage(covoit1);
-        this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers1a);
         
-//        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers2));
-//        covoit2.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit2);
-//        covoit2.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit2);
-//        this.reservationCovoiturageRepository.save(covoit2);
+        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers2));
+        covoit2.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit2);
+        covoit2.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit2);
+        this.reservationCovoiturageRepository.save(covoit2);
         
         
-//        ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers2));
-//        covoit3.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit3);
-//        covoit3.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit3);
-//        this.reservationCovoiturageRepository.save(covoit3);
+        ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers3));
+        covoit3.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit3);
+        covoit3.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit3);
+        this.reservationCovoiturageRepository.save(covoit3);
         
     }
 

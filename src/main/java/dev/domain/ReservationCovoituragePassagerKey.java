@@ -2,16 +2,19 @@ package dev.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class ReservationCovoituragePassagerKey implements Serializable {
 
 	private static final long serialVersionUID = -3714353642317226610L;
-	
-    protected Long utilisateurId;
- 
-    protected Long reservationCovoiturageId;
+
+	@Column(name = "utilisateur_id")
+	protected Long utilisateurId;
+
+	@Column(name = "reservation_covoiturage_id")
+	protected Long reservationCovoiturageId;
 
 	public ReservationCovoituragePassagerKey() {
 		super();

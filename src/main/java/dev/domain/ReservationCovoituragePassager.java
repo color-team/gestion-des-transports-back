@@ -33,6 +33,14 @@ public class ReservationCovoituragePassager {
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Utilisateur getPassager() {
 		return passager;
 	}
@@ -55,19 +63,5 @@ public class ReservationCovoituragePassager {
 
 	public void setStatutReservationCovoiturage(StatutReservationCovoiturage statutReservationCovoiturage) {
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
-	}
-
-	/** Getter
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/** Setter
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 }
