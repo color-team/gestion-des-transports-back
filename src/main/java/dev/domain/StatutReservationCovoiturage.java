@@ -19,16 +19,16 @@ public class StatutReservationCovoiturage {
     protected Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    protected ReservationCovoiturage reservationCovoiturage;
+    protected ReservationCovoituragePassager reservationCovoituragePassager;
 
     @Enumerated(EnumType.STRING)
     protected StatutReservationCovoiturageEnum statutReservationCovoiturage;
 
     public StatutReservationCovoiturage() {}
     
-	public StatutReservationCovoiturage(ReservationCovoiturage reservationCovoiturage,
+	public StatutReservationCovoiturage(ReservationCovoituragePassager reservationCovoituragePassager,
 			StatutReservationCovoiturageEnum statutReservationCovoiturage) {
-		this.reservationCovoiturage = reservationCovoiturage;
+		this.reservationCovoituragePassager = reservationCovoituragePassager;
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
 	}
 
@@ -40,12 +40,12 @@ public class StatutReservationCovoiturage {
 		this.id = id;
 	}
 
-	public ReservationCovoiturage getReservationCovoiturage() {
-		return reservationCovoiturage;
+	public ReservationCovoituragePassager getReservationCovoituragePassager() {
+		return reservationCovoituragePassager;
 	}
 
-	public void setReservationCovoiturage(ReservationCovoiturage reservationCovoiturage) {
-		this.reservationCovoiturage = reservationCovoiturage;
+	public void setReservationCovoituragePassager(ReservationCovoituragePassager reservationCovoituragePassager) {
+		this.reservationCovoituragePassager = reservationCovoituragePassager;
 	}
 
 	public StatutReservationCovoiturageEnum getStatutReservationCovoiturage() {

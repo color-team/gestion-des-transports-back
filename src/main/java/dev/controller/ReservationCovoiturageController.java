@@ -26,22 +26,28 @@ public class ReservationCovoiturageController {
 		this.service = service;
 	}
 
-	// GET /reservations-covoiturage
-	@GetMapping("/present")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
-	}
+//	// GET /reservations-covoiturage
+//	@GetMapping("/present")
+//	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
+//		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
+//	}
+//	
+//	@GetMapping("/past")
+//	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInPast() {
+//		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInPast());
+//	}
+//
+//	// GET /reservations-covoiturage/matricule
+//	@GetMapping("/{matricule}")
+//	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
+//		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
+//	}
 	
-	@GetMapping("/past")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInPast() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInPast());
-	}
-
 	// GET /reservations-covoiturage/matricule
-	@GetMapping("/{matricule}")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
-	}
+		@GetMapping("/test/{matricule}")
+		public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatriculeTest(@PathVariable String matricule) {
+			return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatriculeTest(matricule));
+		}
 
 	// POST /reservations-covoiturage
 //	@PostMapping

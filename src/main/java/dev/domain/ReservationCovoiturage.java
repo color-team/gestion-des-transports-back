@@ -1,13 +1,16 @@
 package dev.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import dev.domain.enumeration.StatutReservationCovoiturageEnum;
 
 @Entity
 public class ReservationCovoiturage extends Reservation {
@@ -15,49 +18,53 @@ public class ReservationCovoiturage extends Reservation {
 	/**	nombre initial de places pour les passagers */
 	protected byte nbPlacesPassagers;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	protected StatutReservationCovoiturage statutReservationCovoiturage;
-	
 	@ManyToOne(cascade = CascadeType.ALL)
 	protected VehiculeParticulier vehiculeParticulier;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	protected Utilisateur conducteur;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	protected List<Utilisateur> passagers;
+	@OneToMany(cascade = CascadeType.ALL)
+	protected List<ReservationCovoituragePassager> reservationsCovoituragePassagers = new ArrayList<>();
 
 	public ReservationCovoiturage() {}
-
-	public ReservationCovoiturage(LocalDateTime dateDepart, Localisation depart, Localisation destination,
-			Utilisateur conducteur, byte nbPassagers, StatutReservationCovoiturage statutReservationCovoiturage,
-			VehiculeParticulier vehiculeParticulier, List<Utilisateur> passagers) {
+	
+	public ReservationCovoiturage(
+			LocalDateTime dateDepart,
+			Localisation depart,
+			Localisation destination,
+			Utilisateur conducteur,
+			byte nbPassagers,
+			VehiculeParticulier vehiculeParticulier
+		) {
 		super(dateDepart, depart, destination);
 		this.nbPlacesPassagers = nbPassagers;
-		this.statutReservationCovoiturage = statutReservationCovoiturage;
 		this.vehiculeParticulier = vehiculeParticulier;
 		this.conducteur = conducteur;
-		this.passagers = passagers;
+	}
+
+	public ReservationCovoiturage(
+			LocalDateTime dateDepart,
+			Localisation depart,
+			Localisation destination,
+			Utilisateur conducteur,
+			byte nbPassagers,
+			VehiculeParticulier vehiculeParticulier,
+			List<ReservationCovoituragePassager> reservationsCovoituragePassagers
+		) {
+		super(dateDepart, depart, destination);
+		this.nbPlacesPassagers = nbPassagers;
+		this.vehiculeParticulier = vehiculeParticulier;
+		this.conducteur = conducteur;
+		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
 	}
 	
 	public int getNbPlacesDisponibles() {
-		return nbPlacesPassagers - passagers.size();
-	}
-
-	public byte getNbPassagers() {
-		return nbPlacesPassagers;
-	}
-
-	public void setNbPassagers(byte nbPassagers) {
-		this.nbPlacesPassagers = nbPassagers;
-	}
-
-	public StatutReservationCovoiturage getStatutReservationCovoiturage() {
-		return statutReservationCovoiturage;
-	}
-
-	public void setStatutReservationCovoiturage(StatutReservationCovoiturage statutReservationCovoiturage) {
-		this.statutReservationCovoiturage = statutReservationCovoiturage;
+		return nbPlacesPassagers - reservationsCovoituragePassagers.stream()
+				.map(ReservationCovoituragePassager::getStatutReservationCovoiturage)
+				.filter(statut -> statut.getStatutReservationCovoiturage() != StatutReservationCovoiturageEnum.ANNULEE)
+				.collect(Collectors.toList())
+				.size();
 	}
 
 	public VehiculeParticulier getVehiculeParticulier() {
@@ -76,11 +83,19 @@ public class ReservationCovoiturage extends Reservation {
 		this.conducteur = conducteur;
 	}
 
-	public List<Utilisateur> getPassagers() {
-		return passagers;
+	public byte getNbPlacesPassagers() {
+		return nbPlacesPassagers;
 	}
 
-	public void setPassagers(List<Utilisateur> passagers) {
-		this.passagers = passagers;
+	public void setNbPlacesPassagers(byte nbPlacesPassagers) {
+		this.nbPlacesPassagers = nbPlacesPassagers;
+	}
+
+	public List<ReservationCovoituragePassager> getReservationsCovoituragePassagers() {
+		return reservationsCovoituragePassagers;
+	}
+
+	public void setReservationsCovoituragePassagers(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
+		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
 	}
 }

@@ -11,9 +11,9 @@ import dev.domain.ReservationSansChauffeur;
 
 public interface ReservationSansChauffeurRepository extends JpaRepository<ReservationSansChauffeur, Long> {
 	
-	@Query("select r from ReservationSansChauffeur r join r.conducteur c where c.matricule = :matricule")
-	List<ReservationSansChauffeur> findByConducteurMatricule(@Param("matricule") String matricule);
-
-	List<ReservationSansChauffeur> findByDateDepartAfter(LocalDateTime now);
+//	@Query("select r from ReservationSansChauffeur r join r.conducteur c where c.matricule = :matricule")
+//	List<ReservationSansChauffeur> findByConducteurMatricule(@Param("matricule") String matricule);
+//
+//	List<ReservationSansChauffeur> findByDateDepartAfter(LocalDateTime now);
 	
 }
