@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import dev.domain.Localisation;
 import dev.domain.ReservationCovoiturage;
+import dev.domain.ReservationCovoituragePassager;
 import dev.domain.RoleUtilisateur;
 import dev.domain.StatutReservationCovoiturage;
 import dev.domain.Utilisateur;
@@ -20,6 +21,7 @@ import dev.domain.VehiculeParticulier;
 import dev.domain.Version;
 import dev.domain.enumeration.Role;
 import dev.domain.enumeration.StatutReservationCovoiturageEnum;
+import dev.repository.ReservationCovoituragePassagerRepository;
 import dev.repository.ReservationCovoiturageRepository;
 import dev.repository.UtilisateurRepo;
 import dev.repository.VersionRepo;
@@ -37,13 +39,15 @@ public class StartupListener {
     private PasswordEncoder passwordEncoder;
     private UtilisateurRepo utilisateurRepo;
     private ReservationCovoiturageRepository reservationCovoiturageRepository;
+    private ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository;
 
-    public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, UtilisateurRepo utilisateurRepo, ReservationCovoiturageRepository reservationCovoiturageRepository) {
+    public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, UtilisateurRepo utilisateurRepo, ReservationCovoiturageRepository reservationCovoiturageRepository, ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository) {
         this.appVersion = appVersion;
         this.versionRepo = versionRepo;
         this.passwordEncoder = passwordEncoder;
         this.utilisateurRepo = utilisateurRepo;
         this.reservationCovoiturageRepository = reservationCovoiturageRepository;
+        this.reservationCovoituragePassagerRepository = reservationCovoituragePassagerRepository;
     }
 
     @EventListener(ContextRefreshedEvent.class)
@@ -116,18 +120,42 @@ public class StartupListener {
         this.utilisateurRepo.save(user8);
         
         //  Création d'un véhicule particulier
-        Utilisateur[] passagers1 = {user5, user7};
-        Utilisateur[] passagers2 = {user8, user7};
+        ReservationCovoituragePassager reservationsCovoituragePassagers1a = new ReservationCovoituragePassager(user5, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers1b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers1 = {reservationsCovoituragePassagers1a, reservationsCovoituragePassagers1b};
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers2a = new ReservationCovoituragePassager(user8, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers2b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers2 = {reservationsCovoituragePassagers2a, reservationsCovoituragePassagers2b};
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers3a = new ReservationCovoituragePassager(user8, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers3b = new ReservationCovoituragePassager(user7, null, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
+        ReservationCovoituragePassager[] reservationsCovoituragePassagers3 = {reservationsCovoituragePassagers3a, reservationsCovoituragePassagers3b};
         VehiculeParticulier vehiculeParticulier1 = new VehiculeParticulier("AKG-666-69", "Ford", "https://images.caradisiac.com/logos/4/0/6/1/254061/S8-nouvelle-ford-focus-st-prix-agressif-mais-malus-eleve-176166.jpg", null, "Focus", "Berline");
         
         //  Création de réservationCovoiturage
-        ReservationCovoiturage covoit1 = new ReservationCovoiturage(LocalDateTime.of(2020,9,17,9,10), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Marseille-St-Charles, Marseille", "Marseille", 13000, 43.3f , 5.4f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers1) );
+        ReservationCovoiturage covoit1 = new ReservationCovoiturage(
+        		LocalDateTime.of(2020,9,17,9,10),
+        		new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f),
+        		new Localisation("Gare de Marseille-St-Charles, Marseille", "Marseille", 13000, 43.3f , 5.4f),
+        		user2,
+        		(byte) 4,
+        		vehiculeParticulier1,
+        		Arrays.asList(reservationsCovoituragePassagers1)
+        );
+        covoit1.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit1);
+        covoit1.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit1);
         this.reservationCovoiturageRepository.save(covoit1);
         
-        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
+        ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers2));
+        covoit2.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit2);
+        covoit2.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit2);
         this.reservationCovoiturageRepository.save(covoit2);
         
-        ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE), vehiculeParticulier1, Arrays.asList(passagers2));
+        
+        ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, vehiculeParticulier1, Arrays.asList(reservationsCovoituragePassagers3));
+        covoit3.getReservationsCovoituragePassagers().get(0).setReservationCovoiturage(covoit3);
+        covoit3.getReservationsCovoituragePassagers().get(1).setReservationCovoiturage(covoit3);
         this.reservationCovoiturageRepository.save(covoit3);
         
     }

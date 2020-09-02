@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.ReservationCovoiturageDto;
-import dev.domain.ReservationCovoiturage;
 import dev.service.ReservationCovoiturageService;
 
 @RestController
@@ -26,20 +25,9 @@ public class ReservationCovoiturageController {
 		this.service = service;
 	}
 
-	// GET /reservations-covoiturage
-	@GetMapping("/present")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
-	}
-	
-	@GetMapping("/past")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInPast() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInPast());
-	}
-
 	// GET /reservations-covoiturage/matricule
 	@GetMapping("/{matricule}")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
+	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatriculeTest(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
 	}
 

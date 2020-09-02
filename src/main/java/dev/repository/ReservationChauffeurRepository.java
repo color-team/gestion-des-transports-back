@@ -11,12 +11,12 @@ import dev.domain.ReservationChauffeur;
 
 public interface ReservationChauffeurRepository extends JpaRepository<ReservationChauffeur, Long> {
 
-	@Query("select r from ReservationChauffeur r join r.passager p where p.matricule = :matricule")
-	List<ReservationChauffeur> findByPassagerMatricule(@Param("matricule") String matricule);
-	
-	@Query("select r from ReservationChauffeur r join r.chauffeur c where c.matricule = :matricule")
-	List<ReservationChauffeur> findByChauffeurMatricule(@Param("matricule") String matricule);
-
-	List<ReservationChauffeur> findByDateDepartAfter(LocalDateTime now);
+//	@Query("select r from ReservationChauffeur r join r.passager p where p.matricule = :matricule")
+//	List<ReservationChauffeur> findByPassagerMatricule(@Param("matricule") String matricule);
+//	
+//	@Query("select r from ReservationChauffeur r join r.chauffeur c where c.matricule = :matricule")
+//	List<ReservationChauffeur> findByChauffeurMatricule(@Param("matricule") String matricule);
+//
+//	List<ReservationChauffeur> findByDateDepartAfter(LocalDateTime now);
 	
 }
