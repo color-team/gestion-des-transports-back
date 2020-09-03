@@ -42,7 +42,6 @@ public class ReservationCovoiturageService {
 		return resaCovoitMapper.toDto( resaCovoit);
 	}
 
-
 	public List<ReservationCovoiturageDto> findByPassagerMatricule(String matricule) {
 		return resaCovoitPassagerRepo.findByPassagerMatricule( matricule).stream()
 				.map( resaCovoitPassager -> resaCovoitMapper.ReservationCovoituragePassagerToDto( resaCovoitPassager)).collect( Collectors.toList());

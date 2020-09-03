@@ -41,5 +41,28 @@ public class VehiculeEntreprise extends Vehicule {
 	public void setReservationsEntreprise(List<ReservationEntreprise> reservationsEntreprise) {
 		this.reservationsEntreprise = reservationsEntreprise;
 	}
-	
+
+	public byte getNbPlaces() {
+		return nbPlaces;
+	}
+
+	public void setNbPlaces(byte nbPlaces) {
+		this.nbPlaces = nbPlaces;
+	}
+
+	public Localisation getLocalisation() {
+		return localisation;
+	}
+
+	public void setLocalisation(Localisation localisation) {
+		this.localisation = localisation;
+	}
+
+	public StatutVehicule getStatutVehicule() {
+		return statutVehicule;
+	}
+
+	public void setStatutVehicule(StatutVehicule statutVehicule) {
+		this.statutVehicule = statutVehicule;
+	}
 }
