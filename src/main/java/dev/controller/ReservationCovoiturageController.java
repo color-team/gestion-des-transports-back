@@ -45,7 +45,10 @@ public class ReservationCovoiturageController {
 					new MessageErreurDto( CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
 		
-		return ResponseEntity.status( HttpStatus.OK).body(service.create( annonceCovoitDto));
+		ReservationCovoiturage resaCovoit = service.create( annonceCovoitDto);
+		ReservationCovoiturageDto resaCovoitDto = service.convertToDto( resaCovoit);
+		
+		return ResponseEntity.status( HttpStatus.OK).body( resaCovoitDto);
 	}
 
 }
