@@ -24,7 +24,7 @@ public class ReservationCovoiturage extends Reservation {
 	@ManyToOne(cascade = CascadeType.ALL)
 	protected Utilisateur conducteur;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "reservationCovoiturage")
 	protected List<ReservationCovoituragePassager> reservationsCovoituragePassagers = new ArrayList<>();
 
 	public ReservationCovoiturage() {}
