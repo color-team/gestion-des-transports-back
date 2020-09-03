@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -42,8 +41,8 @@ public class Utilisateur {
     @OneToMany(mappedBy = "conducteur")
     protected List<ReservationSansChauffeur> reservationsSansChauffeur;
     
-    @ManyToMany(mappedBy = "passagers")
-    protected List<ReservationCovoiturage> reservationsCovoiturage;
+    @OneToMany(mappedBy = "passager")
+    protected List<ReservationCovoituragePassager> reservationsCovoituragePassagers;
 
     public Utilisateur() {}
     
@@ -149,11 +148,11 @@ public class Utilisateur {
 		this.reservationsSansChauffeur = reservationsSansChauffeur;
 	}
 
-	public List<ReservationCovoiturage> getReservationsCovoiturage() {
-		return reservationsCovoiturage;
+	public List<ReservationCovoituragePassager> getReservationsCovoituragePassager() {
+		return reservationsCovoituragePassagers;
 	}
 
-	public void setReservationsCovoiturage(List<ReservationCovoiturage> reservationsCovoiturage) {
-		this.reservationsCovoiturage = reservationsCovoiturage;
+	public void setReservationsCovoituragePassager(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
+		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
 	}
 }

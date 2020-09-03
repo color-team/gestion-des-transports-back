@@ -10,7 +10,7 @@ public class AnnonceCovoiturageDto {
 
 	protected String destination;
 	
-	protected int nbPassager;
+	protected byte nbPassager;
 
 	protected VehiculeParticulierDto vehicule;
 
@@ -18,7 +18,7 @@ public class AnnonceCovoiturageDto {
 	
 	public AnnonceCovoiturageDto() {}
 
-	public AnnonceCovoiturageDto(LocalDateTime dateDepart, String depart, String destination, int nbPassager,
+	public AnnonceCovoiturageDto(LocalDateTime dateDepart, String depart, String destination, byte nbPassager,
 			VehiculeParticulierDto vehicule, String conducteur) {
 		super();
 		this.dateDepart = dateDepart;
@@ -27,6 +27,14 @@ public class AnnonceCovoiturageDto {
 		this.nbPassager = nbPassager;
 		this.vehicule = vehicule;
 		this.conducteur = conducteur;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "AnnonceCovoiturageDto [dateDepart=" + dateDepart + ", depart=" + depart + ", destination=" + destination
+				+ ", nbPassager=" + nbPassager + ", vehicule=" + vehicule + ", conducteur=" + conducteur + "]";
 	}
 
 	public LocalDateTime getDateDepart() {
@@ -53,11 +61,11 @@ public class AnnonceCovoiturageDto {
 		this.destination = destination;
 	}
 
-	public int getNbPassager() {
+	public byte getNbPassager() {
 		return nbPassager;
 	}
 
-	public void setNbPassager(int nbPassager) {
+	public void setNbPassager(byte nbPassager) {
 		this.nbPassager = nbPassager;
 	}
 

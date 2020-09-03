@@ -1,29 +1,39 @@
 package dev.controller.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import dev.controller.dto.AnnonceCovoiturageDto;
 import dev.controller.dto.ReservationCovoiturageDto;
-import dev.controller.dto.VehiculeParticulierDto;
 import dev.domain.Localisation;
 import dev.domain.ReservationCovoiturage;
-import dev.domain.StatutReservationCovoiturage;
 import dev.domain.Utilisateur;
 import dev.domain.VehiculeParticulier;
+import dev.repository.UtilisateurRepo;
+import dev.domain.ReservationCovoituragePassager;
 
 public class ReservationCovoiturageMapper {
 	
+	@Autowired
+	private static UtilisateurRepo userRepo;	
 	
-
-	public static ReservationCovoiturageDto toDto(ReservationCovoiturage reservationCovoiturage) {
-		return new ReservationCovoiturageDto(
-				reservationCovoiturage.getDateDepart(),
-				reservationCovoiturage.getDepart().getAdresse(), 
-				reservationCovoiturage.getDestination().getAdresse(),
-				reservationCovoiturage.getStatutReservationCovoiturage().getStatutReservationCovoiturage().name(),
-				reservationCovoiturage.getVehiculeParticulier().getInfos(),
-				reservationCovoiturage.getConducteur().getInfos());
+//	public static ReservationCovoiturageDto toDto(ReservationCovoiturage reservationCovoiturage) {
+//		return new ReservationCovoiturageDto(reservationCovoiturage.getDateDepart(),
+//				reservationCovoiturage.getDepart().getAdresse(), reservationCovoiturage.getDestination().getAdresse(),
+//				reservationCovoiturage.getStatutReservationCovoiturage().getStatutReservationCovoiturage().name(),
+//				reservationCovoiturage.getVehiculeParticulier().getInfos(),
+//				reservationCovoiturage.getConducteur().getInfos());
+//	}
+	
+	public static ReservationCovoiturageDto ReservationCovoituragePassagerToDto(ReservationCovoituragePassager reservationCovoituragePassager) {
+		return new ReservationCovoiturageDto(reservationCovoituragePassager.getReservationCovoiturage().getDateDepart(),
+				reservationCovoituragePassager.getReservationCovoiturage().getDepart().getAdresse(), reservationCovoituragePassager.getReservationCovoiturage().getDestination().getAdresse(),
+				reservationCovoituragePassager.getStatutReservationCovoiturage().getStatutReservationCovoiturage().name(),
+				reservationCovoituragePassager.getReservationCovoiturage().getVehiculeParticulier().getInfos(),
+				reservationCovoituragePassager.getReservationCovoiturage().getConducteur().getInfos());
 	}
 	
-	/*public static ReservationCovoiturage fromDto( AnnonceCovoiturageDto annonce) {
+	
+	public static ReservationCovoiturage fromDto( AnnonceCovoiturageDto annonce) {
 		
 		Localisation depart = new Localisation();
 		depart.setAdresse( annonce.getDepart());
@@ -39,16 +49,14 @@ public class ReservationCovoiturageMapper {
 				annonce.getVehicule().getModele(),
 				null);
 		
-		Utilisateur conduteur = repo.findUser();
+		Utilisateur conducteur = userRepo.findByEmail( annonce.getConducteur()).get();
 		
 		return new ReservationCovoiturage( 
 				annonce.getDateDepart(),
 				depart, 
 				destination,
-				annonce.getVehicule().getPlaces(),
-				null,
-				vehicule,
-				'',
-				null);
-	}*/
+				conducteur,
+				annonce.getNbPassager(),
+				vehicule);
+	}
 }

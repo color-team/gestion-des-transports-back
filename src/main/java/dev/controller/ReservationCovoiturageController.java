@@ -30,33 +30,24 @@ public class ReservationCovoiturageController {
 		this.service = service;
 	}
 
-	// GET /reservations-covoiturage
-	@GetMapping("/present")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInFuture() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
-	}
-	
-	@GetMapping("/past")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findAllInPast() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInPast());
-	}
-
 	// GET /reservations-covoiturage/matricule
 	@GetMapping("/{matricule}")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
+	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatriculeTest(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
 	}
 
 	// POST /reservations-covoiturage
-	/*@PostMapping
-	public ResponseEntity<?> create(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
+	@PostMapping
+	public ResponseEntity<?> create( @RequestBody @Valid AnnonceCovoiturageDto annonceCovoitDto,
 			BindingResult result) {
-		if (result.hasErrors()) {
+		if ( result.hasErrors()) {
 			throw new ReservationCovoiturageInvalideException(
-					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
+					new MessageErreurDto( CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
-
-		return ResponseEntity.status(HttpStatus.OK).body(service.create(annonceCovoiturageDto));
-	}*/
+		
+		System.out.println( annonceCovoitDto);
+		
+		return ResponseEntity.status( HttpStatus.OK).body(service.create( annonceCovoitDto));
+	}
 
 }

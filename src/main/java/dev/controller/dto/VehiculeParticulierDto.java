@@ -20,6 +20,15 @@ public class VehiculeParticulierDto {
 		this.places = places;
 	}
 
+	
+	
+	
+	@Override
+	public String toString() {
+		return "VehiculeParticulierDto [immatriculation=" + immatriculation + ", marque=" + marque + ", modele="
+				+ modele + ", places=" + places + "]";
+	}
+
 	public String getImmatriculation() {
 		return immatriculation;
 	}
