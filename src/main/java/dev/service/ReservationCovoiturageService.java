@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.controller.dto.AnnonceCovoiturageDto;
+import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.controller.mapper.ReservationCovoiturageMapper;
 import dev.domain.ReservationCovoiturage;
@@ -30,7 +30,7 @@ public class ReservationCovoiturageService {
 
 
 	@Transactional
-	public ReservationCovoiturage create( AnnonceCovoiturageDto annonceCovoitDto) {
+	public ReservationCovoiturage create( AnnonceCovoiturageCreerDto annonceCovoitDto) {
 		Utilisateur conducteur = userRepo.findByMatricule( annonceCovoitDto.getConducteur()).get(0);
 		ReservationCovoiturage resaCovoit = resaCovoitMapper.fromDto( annonceCovoitDto, conducteur);
 		resaCovoitRepo.save( resaCovoit);

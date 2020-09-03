@@ -3,7 +3,7 @@ package dev.controller.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import dev.controller.dto.AnnonceCovoiturageDto;
+import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.domain.Localisation;
 import dev.domain.ReservationCovoiturage;
@@ -36,7 +36,7 @@ public class ReservationCovoiturageMapper {
 	}
 	
 	
-	public ReservationCovoiturage fromDto( AnnonceCovoiturageDto annonce, Utilisateur conducteur) {
+	public ReservationCovoiturage fromDto( AnnonceCovoiturageCreerDto annonce, Utilisateur conducteur) {
 
 		Localisation depart = new Localisation();
 		depart.setAdresse( annonce.getDepart());
