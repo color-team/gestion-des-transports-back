@@ -42,9 +42,25 @@ public class ReservationCovoiturageService {
 
 
 	@Transactional
-	public AnnonceCovoiturageDto addPassager(AnnonceCovoiturageDto annonceCovoiturageDto, String matricule) {
+	public AnnonceCovoiturageDto addPassagerByMatricule(AnnonceCovoiturageDto annonceCovoiturageDto, String matricule) {
 		
 		Utilisateur passager = utilisateurRepo.findByMatricule(matricule).get(0);
+		
+		ReservationCovoiturage annonceCovoiturage = reservationCovoiturageRepo.findById(annonceCovoiturageDto.getId()).get();
+		
+		ReservationCovoituragePassager reservationCovoituragePassager = new ReservationCovoituragePassager(passager, annonceCovoiturage, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+		
+		reservationCovoituragePassagerRepo.save(reservationCovoituragePassager);
+		
+		annonceCovoiturageDto.addPassager();
+		
+		return annonceCovoiturageDto;
+	}
+	
+	@Transactional
+	public AnnonceCovoiturageDto addMeAsPassenger(AnnonceCovoiturageDto annonceCovoiturageDto) {
+		
+		Utilisateur passager = utilisateurRepo.findByMatricule(utilisateurRepo.findByEmail(securityService.getUserEmail()).get().getMatricule()).get(0);
 		
 		ReservationCovoiturage annonceCovoiturage = reservationCovoiturageRepo.findById(annonceCovoiturageDto.getId()).get();
 		
@@ -66,6 +82,14 @@ public class ReservationCovoiturageService {
 	
 	public List<ReservationCovoiturageDto> findByPassagerMatricule(String matricule) {
 		return reservationCovoituragePassagerRepo.findByPassagerMatricule(matricule).stream().map(reservationCovoituragePassager -> ReservationCovoiturageMapper.ReservationCovoituragePassagerToDto(reservationCovoituragePassager)).collect(Collectors.toList());
+	}
+	
+	public List<ReservationCovoiturageDto> findByPassagerConnecte() {
+		
+		
+		return reservationCovoituragePassagerRepo.findByPassagerMatricule(
+				utilisateurRepo.findByEmail(securityService.getUserEmail()).get().getMatricule()
+				).stream().map(reservationCovoituragePassager -> ReservationCovoiturageMapper.ReservationCovoituragePassagerToDto(reservationCovoituragePassager)).collect(Collectors.toList());
 	}
 
 }

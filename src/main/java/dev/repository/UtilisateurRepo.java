@@ -9,7 +9,7 @@ import dev.domain.Utilisateur;
 
 public interface UtilisateurRepo extends JpaRepository<Utilisateur, Long> {
 
-    Optional<Utilisateur> findByEmail(String email);
+	Optional<Utilisateur> findByEmail(String email);
     
     List<Utilisateur> findByMatricule(String matricule);
 }

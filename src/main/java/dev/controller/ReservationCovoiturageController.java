@@ -35,27 +35,47 @@ public class ReservationCovoiturageController {
 	}
 
 	// GET /reservations-covoiturage/
-		@GetMapping
-		public ResponseEntity<List<AnnonceCovoiturageDto>> findAllInFuture() {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
-		}
-	
+	@GetMapping
+	public ResponseEntity<List<AnnonceCovoiturageDto>> findAllInFuture() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllInFuture());
+	}
+
 	// GET /reservations-covoiturage/matricule
 	@GetMapping("/{matricule}")
 	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
 	}
 
+	// GET /reservations-covoiturage/me
+	@GetMapping("/me")
+	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerConnecte() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerConnecte());
+	}
+
 	// POST /reservations-covoiturage/matricule
+	@Secured("ROLE_ADMININSTRATEUR")
 	@PostMapping("/{matricule}")
-	public ResponseEntity<?> addPassager(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
+	public ResponseEntity<?> addPassagerByMatricule(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
 			BindingResult result, @PathVariable String matricule) {
 		if (result.hasErrors()) {
 			throw new ReservationCovoiturageInvalideException(
 					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(service.addPassager(annonceCovoiturageDto, matricule));
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(service.addPassagerByMatricule(annonceCovoiturageDto, matricule));
+	}
+
+	// POST /reservations-covoiturage
+	@PostMapping
+	public ResponseEntity<?> addMeAsPassenger(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			throw new ReservationCovoiturageInvalideException(
+					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(service.addMeAsPassenger(annonceCovoiturageDto));
 	}
 
 }
