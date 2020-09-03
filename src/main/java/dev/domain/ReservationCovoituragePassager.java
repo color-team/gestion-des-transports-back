@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,9 +16,11 @@ public class ReservationCovoituragePassager {
 	private ReservationCovoituragePassagerKey id = new ReservationCovoituragePassagerKey();
  
     @ManyToOne
+    @MapsId(value = "utilisateurId")
     protected Utilisateur passager;
  
     @ManyToOne
+    @MapsId(value = "reservationCovoiturageId")
     protected ReservationCovoiturage reservationCovoiturage;
     
     @OneToOne(cascade = CascadeType.ALL)
