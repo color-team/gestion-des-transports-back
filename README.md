@@ -22,49 +22,7 @@ L'API est disponible à l'adresse suivante :
 
 https://gestion-des-transports-back.herokuapp.com/
 
-* GET /reservations-covoiturage/present
 
-```
-[
-    {
-        "dateDepart": "2020-09-17T09:10:00",
-        "infosDepart": "31 Rue de la paix, Paris",
-        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
-        "statutReservationCovoiturage": "DEMANDEE",
-        "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
-    },
-    {
-        "dateDepart": "2020-09-25T12:30:00",
-        "infosDepart": "31 Rue de la paix, Paris",
-        "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
-        "statutReservationCovoiturage": "DEMANDEE",
-        "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
-    }
-]
-```
-* GET /reservations-covoiturage/past
-```
-[
-    {
-        "dateDepart": "2019-09-17T09:10:00",
-        "infosDepart": "31 Rue de la paix, Paris",
-        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
-        "statutReservationCovoiturage": "DEMANDEE",
-        "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
-    },
-    {
-        "dateDepart": "2020-08-25T12:30:00",
-        "infosDepart": "31 Rue de la paix, Paris",
-        "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
-        "statutReservationCovoiturage": "DEMANDEE",
-        "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
-    }
-]
-```
 
 * GET /reservations-covoiturage/{matricule}
 
