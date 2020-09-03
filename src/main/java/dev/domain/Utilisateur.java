@@ -1,5 +1,6 @@
 package dev.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -153,6 +154,14 @@ public class Utilisateur {
 	}
 
 	public void setReservationsCovoituragePassager(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
+		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
+	}
+
+	public List<ReservationCovoituragePassager> getReservationsCovoituragePassagers() {
+		return reservationsCovoituragePassagers;
+	}
+
+	public void setReservationsCovoituragePassagers(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
 		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
 	}
 }
