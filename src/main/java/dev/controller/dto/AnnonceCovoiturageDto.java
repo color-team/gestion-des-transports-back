@@ -29,14 +29,6 @@ public class AnnonceCovoiturageDto {
 		this.conducteur = conducteur;
 	}
 
-	
-	
-	@Override
-	public String toString() {
-		return "AnnonceCovoiturageDto [dateDepart=" + dateDepart + ", depart=" + depart + ", destination=" + destination
-				+ ", nbPassager=" + nbPassager + ", vehicule=" + vehicule + ", conducteur=" + conducteur + "]";
-	}
-
 	public LocalDateTime getDateDepart() {
 		return dateDepart;
 	}

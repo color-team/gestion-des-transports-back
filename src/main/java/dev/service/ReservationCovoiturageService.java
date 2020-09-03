@@ -27,7 +27,6 @@ public class ReservationCovoiturageService {
 	}
 
 
-
 	@Transactional
 	public ReservationCovoiturage create( AnnonceCovoiturageDto annonceCovoitDto) {
 		ReservationCovoiturage resaCovoit = ReservationCovoiturageMapper.fromDto( annonceCovoitDto );

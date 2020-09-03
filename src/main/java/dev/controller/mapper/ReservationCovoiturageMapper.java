@@ -34,13 +34,13 @@ public class ReservationCovoiturageMapper {
 	
 	
 	public static ReservationCovoiturage fromDto( AnnonceCovoiturageDto annonce) {
-		
+
 		Localisation depart = new Localisation();
 		depart.setAdresse( annonce.getDepart());
 		
 		Localisation destination = new Localisation();
 		destination.setAdresse( annonce.getDestination());
-		
+
 		VehiculeParticulier vehicule = new VehiculeParticulier(
 				annonce.getVehicule().getImmatriculation(),
 				annonce.getVehicule().getMarque(),
@@ -49,8 +49,8 @@ public class ReservationCovoiturageMapper {
 				annonce.getVehicule().getModele(),
 				null);
 		
-		Utilisateur conducteur = userRepo.findByEmail( annonce.getConducteur()).get();
-		
+		Utilisateur conducteur = userRepo.findByMatricule( annonce.getConducteur()).get(0);
+
 		return new ReservationCovoiturage( 
 				annonce.getDateDepart(),
 				depart, 
