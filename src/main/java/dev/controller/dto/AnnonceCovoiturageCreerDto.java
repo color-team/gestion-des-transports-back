@@ -2,7 +2,7 @@ package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
-public class AnnonceCovoiturageDto {
+public class AnnonceCovoiturageCreerDto {
 	
 	protected LocalDateTime dateDepart;
 
@@ -16,9 +16,9 @@ public class AnnonceCovoiturageDto {
 
 	protected String conducteur;
 	
-	public AnnonceCovoiturageDto() {}
+	public AnnonceCovoiturageCreerDto() {}
 
-	public AnnonceCovoiturageDto(LocalDateTime dateDepart, String depart, String destination, byte nbPassager,
+	public AnnonceCovoiturageCreerDto(LocalDateTime dateDepart, String depart, String destination, byte nbPassager,
 			VehiculeParticulierDto vehicule, String conducteur) {
 		super();
 		this.dateDepart = dateDepart;

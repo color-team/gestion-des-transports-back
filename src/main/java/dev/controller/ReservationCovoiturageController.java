@@ -10,7 +10,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import dev.controller.dto.AnnonceCovoiturageDto;
+import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.CodeErreur;
 import dev.controller.dto.MessageErreurDto;
 import dev.controller.dto.ReservationCovoiturageDto;
@@ -38,7 +38,7 @@ public class ReservationCovoiturageController {
 
 	// POST /reservations-covoiturage
 	@PostMapping
-	public ResponseEntity<?> create( @RequestBody @Valid AnnonceCovoiturageDto annonceCovoitDto,
+	public ResponseEntity<?> create( @RequestBody @Valid AnnonceCovoiturageCreerDto annonceCovoitDto,
 			BindingResult result) {
 		if ( result.hasErrors()) {
 			throw new ReservationCovoiturageInvalideException(
