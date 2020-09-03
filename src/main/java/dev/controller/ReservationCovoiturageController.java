@@ -50,11 +50,10 @@ public class ReservationCovoiturageController {
 	}
 
 	// GET /reservations-covoiturage/me
-<<<<<<< HEAD
-		@GetMapping("/me")
-		public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerConnecte() {
-			return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerConnecte());
-		}
+	@GetMapping("/me")
+	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerConnecte() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerConnecte());
+	}
 
 //AL
 	// POST /reservations-covoiturage
@@ -76,10 +75,12 @@ public class ReservationCovoiturageController {
 	@PutMapping
 	public ResponseEntity<?> addMeAsPassenger(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
 			BindingResult result) {
-=======
-	@GetMapping("/me")
-	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerConnecte() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerConnecte());
+		if (result.hasErrors()) {
+			throw new ReservationCovoiturageInvalideException(
+					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(service.addMeAsPassenger(annonceCovoiturageDto));
 	}
 
 	// POST /reservations-covoiturage/matricule
@@ -87,43 +88,13 @@ public class ReservationCovoiturageController {
 	@PostMapping("/{matricule}")
 	public ResponseEntity<?> addPassagerByMatricule(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
 			BindingResult result, @PathVariable String matricule) {
->>>>>>> b43e93d... avec utilisateur connecte POST/reservations-covoiturages
 		if (result.hasErrors()) {
 			throw new ReservationCovoiturageInvalideException(
 					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
 
-<<<<<<< HEAD
-=======
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(service.addPassagerByMatricule(annonceCovoiturageDto, matricule));
 	}
-
-	// POST /reservations-covoiturage
-	@PostMapping
-	public ResponseEntity<?> addMeAsPassenger(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
-			BindingResult result) {
-		if (result.hasErrors()) {
-			throw new ReservationCovoiturageInvalideException(
-					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
-		}
-
->>>>>>> b43e93d... avec utilisateur connecte POST/reservations-covoiturages
-		return ResponseEntity.status(HttpStatus.OK).body(service.addMeAsPassenger(annonceCovoiturageDto));
-	}
-
-	// POST /reservations-covoiturage/matricule
-		@Secured("ROLE_ADMININSTRATEUR")
-		@PostMapping("/{matricule}")
-		public ResponseEntity<?> addPassagerByMatricule(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
-				BindingResult result, @PathVariable String matricule) {
-			if (result.hasErrors()) {
-				throw new ReservationCovoiturageInvalideException(
-						new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
-			}
-
-			return ResponseEntity.status(HttpStatus.OK)
-					.body(service.addPassagerByMatricule(annonceCovoiturageDto, matricule));
-		}
 
 }
