@@ -48,8 +48,8 @@ https://gestion-des-transports-back.herokuapp.com/
 ]
 ```
 
-* GET /reservations-covoiturage
--   Lister toutes les réservations de covoiturage d'un utilisateur connecté
+* GET /reservations-covoiturage/me
+-   Lister toutes les réservations de covoiturage de l'utilisateur connecté
 
 ```
 [
