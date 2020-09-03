@@ -1,24 +1,23 @@
 package dev.domain;
 
 import javax.persistence.CascadeType;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="reservation_covoiturage_passager")
 public class ReservationCovoituragePassager {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@EmbeddedId
+	private ReservationCovoituragePassagerKey id = new ReservationCovoituragePassagerKey();
  
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     protected Utilisateur passager;
  
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     protected ReservationCovoiturage reservationCovoiturage;
     
     @OneToOne(cascade = CascadeType.ALL)
@@ -33,11 +32,11 @@ public class ReservationCovoituragePassager {
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
 	}
 
-	public Long getId() {
+	public ReservationCovoituragePassagerKey getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(ReservationCovoituragePassagerKey id) {
 		this.id = id;
 	}
 
