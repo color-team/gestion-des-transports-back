@@ -83,9 +83,9 @@ public class ReservationCovoiturageController {
 		return ResponseEntity.status(HttpStatus.OK).body(service.addMeAsPassenger(annonceCovoiturageDto));
 	}
 
-	// POST /reservations-covoiturage/matricule
+	// PUT /reservations-covoiturage/matricule
 	@Secured("ROLE_ADMININSTRATEUR")
-	@PostMapping("/{matricule}")
+	@PutMapping("/{matricule}")
 	public ResponseEntity<?> addPassagerByMatricule(@RequestBody @Valid AnnonceCovoiturageDto annonceCovoiturageDto,
 			BindingResult result, @PathVariable String matricule) {
 		if (result.hasErrors()) {
