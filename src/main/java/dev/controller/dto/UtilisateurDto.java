@@ -18,6 +18,8 @@ public class UtilisateurDto {
     private List<Role> roles = new ArrayList<>();
     private String matricule;
 
+    public UtilisateurDto() {}
+    
     public UtilisateurDto(Utilisateur user) {
         this.email = user.getEmail();
         this.nom = user.getNom();

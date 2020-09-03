@@ -17,7 +17,7 @@ public interface ReservationCovoiturageRepository extends JpaRepository<Reservat
 //	@Query("select r from ReservationCovoiturage r join r.conducteur c where c.matricule = :matricule")
 //	List<ReservationCovoiturage> findByConducteurMatricule(@Param("matricule") String matricule);
 //
-//	List<ReservationCovoiturage> findByDateDepartAfter(LocalDateTime now);
+	List<ReservationCovoiturage> findByDateDepartAfter(LocalDateTime now);
 //	
 //	List<ReservationCovoiturage> findByDateDepartBefore(LocalDateTime now);
 	
