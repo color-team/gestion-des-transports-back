@@ -1,6 +1,7 @@
 package dev;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.transaction.Transactional;
@@ -11,20 +12,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import dev.domain.Localisation;
-import dev.domain.ReservationCovoiturage;
-import dev.domain.ReservationCovoituragePassager;
-import dev.domain.RoleUtilisateur;
-import dev.domain.StatutReservationCovoiturage;
-import dev.domain.Utilisateur;
-import dev.domain.VehiculeParticulier;
-import dev.domain.Version;
-import dev.domain.enumeration.Role;
-import dev.domain.enumeration.StatutReservationCovoiturageEnum;
-import dev.repository.ReservationCovoituragePassagerRepository;
-import dev.repository.ReservationCovoiturageRepository;
-import dev.repository.UtilisateurRepo;
-import dev.repository.VersionRepo;
+import dev.domain.*;
+import dev.domain.enumeration.*;
+import dev.repository.*;
 
 /**
  * Code de démarrage de l'application.
@@ -40,17 +30,25 @@ public class StartupListener {
     private UtilisateurRepo utilisateurRepo;
     private ReservationCovoiturageRepository reservationCovoiturageRepository;
     private ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository;
+    private ReservationSansChauffeurRepository reservationSansChauffeurRepo; 
 
-    public StartupListener(@Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder, UtilisateurRepo utilisateurRepo, ReservationCovoiturageRepository reservationCovoiturageRepository, ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository) {
-        this.appVersion = appVersion;
-        this.versionRepo = versionRepo;
-        this.passwordEncoder = passwordEncoder;
-        this.utilisateurRepo = utilisateurRepo;
-        this.reservationCovoiturageRepository = reservationCovoiturageRepository;
-        this.reservationCovoituragePassagerRepository = reservationCovoituragePassagerRepository;
-    }
 
-    @EventListener(ContextRefreshedEvent.class)
+    public StartupListener( @Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder,
+			UtilisateurRepo utilisateurRepo, ReservationCovoiturageRepository reservationCovoiturageRepository,
+			ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository,
+			ReservationSansChauffeurRepository reservationSansChauffeurRepo) {
+		this.appVersion = appVersion;
+		this.versionRepo = versionRepo;
+		this.passwordEncoder = passwordEncoder;
+		this.utilisateurRepo = utilisateurRepo;
+		this.reservationCovoiturageRepository = reservationCovoiturageRepository;
+		this.reservationCovoituragePassagerRepository = reservationCovoituragePassagerRepository;
+		this.reservationSansChauffeurRepo = reservationSansChauffeurRepo;
+	}
+
+
+
+	@EventListener(ContextRefreshedEvent.class)
     public void onStart() {
         this.versionRepo.save(new Version(appVersion));
 
@@ -121,7 +119,10 @@ public class StartupListener {
         
         //  Création d'un véhicule particulier
 
-        VehiculeParticulier vehiculeParticulier1 = new VehiculeParticulier("AKG-666-69", "Ford", "https://images.caradisiac.com/logos/4/0/6/1/254061/S8-nouvelle-ford-focus-st-prix-agressif-mais-malus-eleve-176166.jpg", null, "Focus", "Berline");
+        VehiculeParticulier vehiculeParticulier1 = new VehiculeParticulier(
+        		"AKG-666-69", "Ford", 
+        		"https://images.caradisiac.com/logos/4/0/6/1/254061/S8-nouvelle-ford-focus-st-prix-agressif-mais-malus-eleve-176166.jpg", 
+        		null, "Focus", "Berline");
         
         //  Création de réservationCovoiturage
         ReservationCovoiturage covoit1 = new ReservationCovoiturage(
@@ -156,6 +157,31 @@ public class StartupListener {
         this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers3a);
         this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers3b);
         
+        // Création de véhicules entreprise
+        byte nbPlaces = 4;
+        VehiculeEntreprise vehiculeEntreprise1 = new VehiculeEntreprise( "PRO-000-01", "Fiat", 
+        		"https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg", 
+        		null, "Multipla", "Citadine", nbPlaces, null, new ArrayList<ReservationEntreprise>()); 
+        VehiculeEntreprise vehiculeEntreprise2 = new VehiculeEntreprise( "PRO-000-02", "Mercedes", 
+        		"https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg", 
+        		null, "Cla", "Coupé", nbPlaces, null, new ArrayList<ReservationEntreprise>()); 
+        
+        // Création Reservation sans chauffeurs
+        StatutReservationEntreprise statut1 = new StatutReservationEntreprise();
+        statut1.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ACCEPTEE);
+        ReservationSansChauffeur reservationSansChauffeur1 = new ReservationSansChauffeur(
+        		LocalDateTime.of( 2020, 12, 1, 8, 0, 0),
+        		LocalDateTime.of( 2020, 12, 9, 20, 0, 0),
+    			null, null, user7, vehiculeEntreprise1, statut1);
+        this.reservationSansChauffeurRepo.save( reservationSansChauffeur1);
+        
+        StatutReservationEntreprise statut2 = new StatutReservationEntreprise();
+        statut1.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ANNULEE);
+        ReservationSansChauffeur reservationSansChauffeur2 = new ReservationSansChauffeur(
+        		LocalDateTime.of( 2020, 12, 10, 8, 0, 0),
+        		LocalDateTime.of( 2020, 12, 19, 20, 0, 0),
+    			null, null, user8, vehiculeEntreprise2, statut2);
+        this.reservationSansChauffeurRepo.save( reservationSansChauffeur2);
     }
 
 }

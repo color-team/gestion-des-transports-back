@@ -2,6 +2,8 @@ package dev.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import dev.repository.ReservationSansChauffeurRepository;
@@ -43,6 +45,7 @@ public class ReservationSansChauffeurService {
 		return mapper.toVehiculeDto( vehicule);
 	}
 	
+	@Transactional
 	public ReservationSansChauffeur create( ReservationSansChauffeurDto reservationDto) {
 		VehiculeEntreprise vehicule = vehiculeEntrepriseRepo.findById( reservationDto.getVehiculeId()).get();
 		Utilisateur conducteur = utilisateurRepo.findByMatricule( reservationDto.getConducteur()).get(0);
