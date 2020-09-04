@@ -1,20 +1,21 @@
 package dev.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import dev.repository.ReservationSansChauffeurRepository;
-import dev.repository.UtilisateurRepo;
-import dev.repository.VehiculeEntrepriseRepository;
 import dev.controller.dto.ReservationSansChauffeurDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
 import dev.controller.mapper.ReservationSansChauffeurMapper;
 import dev.domain.ReservationSansChauffeur;
 import dev.domain.Utilisateur;
 import dev.domain.VehiculeEntreprise;
+import dev.repository.ReservationSansChauffeurRepository;
+import dev.repository.UtilisateurRepo;
+import dev.repository.VehiculeEntrepriseRepository;
 
 @Service
 public class ReservationSansChauffeurService {
@@ -37,8 +38,10 @@ public class ReservationSansChauffeurService {
 		this.mapper = mapper;
 	}
 
-	public List<VehiculeEntreprise> findVehicules() {
-		return vehiculeEntrepriseRepo.findAll();
+	public List<VehiculeSansChauffeurDto> findVehicules() {
+		return vehiculeEntrepriseRepo.findAll().stream()
+				.map( vehicule -> mapper.toVehiculeDto( vehicule))
+				.collect( Collectors.toList());
 	}
 	
 	public VehiculeSansChauffeurDto toVehiculeDto( VehiculeEntreprise vehicule) {

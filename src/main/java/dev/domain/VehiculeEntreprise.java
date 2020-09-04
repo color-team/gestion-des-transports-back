@@ -1,8 +1,10 @@
 package dev.domain;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -16,9 +18,9 @@ public class VehiculeEntreprise extends Vehicule {
 	protected Localisation localisation;
 	
 	@OneToMany(mappedBy = "vehiculeEntreprise")
-	protected List<ReservationEntreprise> reservationsEntreprise;
+	protected List<ReservationEntreprise> reservationsEntreprise = new ArrayList<ReservationEntreprise>();
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	protected StatutVehicule statutVehicule;
 
 	public VehiculeEntreprise() {
@@ -27,11 +29,12 @@ public class VehiculeEntreprise extends Vehicule {
 
 	public VehiculeEntreprise(String immatriculation, String marque, String photoUrl, Blob photo, String modele,
 			String categorie, byte nbPlaces, Localisation localisation,
-			List<ReservationEntreprise> reservationsEntreprise) {
+			List<ReservationEntreprise> reservationsEntreprise, StatutVehicule statutVehicule) {
 		super(immatriculation, marque, photoUrl, photo, modele, categorie);
 		this.nbPlaces = nbPlaces;
 		this.localisation = localisation;
 		this.reservationsEntreprise = reservationsEntreprise;
+		this.statutVehicule = statutVehicule;
 	}
 
 	public List<ReservationEntreprise> getReservationsEntreprise() {
@@ -64,5 +67,9 @@ public class VehiculeEntreprise extends Vehicule {
 
 	public void setStatutVehicule(StatutVehicule statutVehicule) {
 		this.statutVehicule = statutVehicule;
+	}
+
+	public void addReservationEntreprise(ReservationSansChauffeur reservationSansChauffeur) {
+		reservationsEntreprise.add(reservationSansChauffeur);
 	}
 }

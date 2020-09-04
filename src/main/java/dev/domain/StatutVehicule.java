@@ -27,7 +27,6 @@ public class StatutVehicule {
     public StatutVehicule() {}
     
 	public StatutVehicule(VehiculeEntreprise vehiculeEntreprise, StatutVehiculeEnum statutVehicule) {
-		super();
 		this.vehiculeEntreprise = vehiculeEntreprise;
 		this.statutVehicule = statutVehicule;
 	}

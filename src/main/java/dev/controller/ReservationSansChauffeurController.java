@@ -36,14 +36,8 @@ public class ReservationSansChauffeurController {
 	}
 	
 	@GetMapping("/vehicules")
-	public ResponseEntity<List<VehiculeSansChauffeurDto>> getVehicules(){
-		
-		List<VehiculeEntreprise> vehicules = service.findVehicules();
-		List<VehiculeSansChauffeurDto> vehiculesDto = vehicules.stream()
-				.map( vehicule -> service.toVehiculeDto( vehicule))
-				.collect( Collectors.toList());
-		
-		return ResponseEntity.ok( vehiculesDto);
+	public ResponseEntity<List<VehiculeSansChauffeurDto>> getVehicules() {
+		return ResponseEntity.ok( service.findVehicules() );
 	}
 	
 	@PostMapping
