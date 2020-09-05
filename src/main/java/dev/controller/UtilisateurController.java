@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.ChauffeurDto;
+import dev.repository.UtilisateurRepo;
 import dev.service.UtilisateurService;
 
 @RestController
@@ -19,6 +20,13 @@ public class UtilisateurController {
 	
 	protected UtilisateurService service;
 	
+	/**
+	 * @param service
+	 */
+	public UtilisateurController(UtilisateurService service) {
+		this.service = service;
+	}
+
 	// GET /administrateur/chauffeurs
 		/**
 		 * Lister toutes les utilsateurs avec un role de Chauffeur
