@@ -37,7 +37,7 @@ public class ReservationSansChauffeurController {
 	
 	@GetMapping("/vehicules")
 	public ResponseEntity<List<VehiculeSansChauffeurDto>> getVehicules() {
-		return ResponseEntity.ok( service.findVehicules() );
+		return ResponseEntity.ok( service.findVehicules());
 	}
 	
 	@PostMapping
@@ -47,10 +47,6 @@ public class ReservationSansChauffeurController {
 			throw new ReservationCovoiturageInvalideException(
 					new MessageErreurDto( CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
-		
-		ReservationSansChauffeur reservation = service.create( reservationDto);
-		
-		return ResponseEntity.ok( reservation);
+		return ResponseEntity.ok( service.create( reservationDto));
 	}
-
 }

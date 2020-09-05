@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import dev.controller.dto.DispoResrvationSansChauffeurDto;
 import dev.controller.dto.ReservationSansChauffeurDto;
+import dev.controller.dto.ReservationSansChauffeurInfosDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
 import dev.domain.ReservationEntreprise;
 import dev.domain.ReservationSansChauffeur;
@@ -47,7 +48,7 @@ public class ReservationSansChauffeurMapper {
 		StatutReservationEntreprise statut = new StatutReservationEntreprise();
 		statut.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ACCEPTEE);
 		
-		return new ReservationSansChauffeur(
+		ReservationSansChauffeur reservation = new ReservationSansChauffeur(
 				reservationDto.getDateDepart(),
 				reservationDto.getDateArrivee(),
 				null,
@@ -55,6 +56,22 @@ public class ReservationSansChauffeurMapper {
 				conducteur,
 				vehicule,
 				statut);
+		
+        statut.setReservationEntreprise( reservation);
+        reservation.setStatutReservationEntreprise( statut);
+        vehicule.addReservationEntreprise( reservation);
+        reservation.setVehiculeEntreprise( vehicule);
+        
+		return reservation;
+	}
+	
+	public ReservationSansChauffeurInfosDto toReservationInfosDto( ReservationSansChauffeur reservation) {
+		return new ReservationSansChauffeurInfosDto(
+				reservation.getConducteur().getInfos(),
+				reservation.getDateDepart(),
+				reservation.getDateArrivee(),
+				reservation.getVehiculeEntreprise().getInfos(),
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise().name());
 	}
 
 }
