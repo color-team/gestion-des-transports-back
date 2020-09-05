@@ -168,7 +168,7 @@ https://gestion-des-transports-back.herokuapp.com/
 }
 ```
 
-* // PUT /reservations-covoiturage/matricule (Administrateur)
+* PUT /reservations-covoiturage/matricule (Administrateur)
 -   Ajouter l'utilisateur dont le matricule est passé en paramètre comme passager d'une annonce de covoiturage
 
 -   Request:
@@ -194,5 +194,81 @@ https://gestion-des-transports-back.herokuapp.com/
     "infosVehiculeParticulier": "Ford Focus",
     "infosConducteur": "DEV USER",
     "nbPlacesDisponibles": 3
+}
+```
+
+* GET /vehicules-entreprise (Administrateur)
+-   Récupérer tous les véhicules de service
+
+```
+[
+    {
+        "immatriculation": "PRO-000-01",
+        "marque": "Fiat",
+        "modele": "Multipla",
+        "categorie": "Citadine",
+        "nbPlaces": 4,
+        "photoUrl": "https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg",
+        "statutVehicule": "EN_SERVICE"
+    },
+    {
+        "immatriculation": "PRO-000-02",
+        "marque": "Mercedes",
+        "modele": "Cla",
+        "categorie": "CoupÃ©",
+        "nbPlaces": 4,
+        "photoUrl": "https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg",
+        "statutVehicule": "EN_SERVICE"
+    },
+    {
+        "immatriculation": "PRO-000-03",
+        "marque": "Simca",
+        "modele": "Simca 1000",
+        "categorie": "Citadine",
+        "nbPlaces": 4,
+        "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
+        "statutVehicule": "EN_SERVICE"
+    }
+]
+```
+
+* POST /vehicules-entreprise (Administrateur)
+-   Créer un véhicule de service avec le statut "EN_SERVICE"
+
+
+-   Request:
+```
+{
+    "immatriculation": "PRO-000-03",
+    "marque": "Simca",
+    "modele": "Simca 1000",
+    "categorie": "Citadine",
+    "nbPlaces": 4,
+    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg"
+}
+```
+ou :
+```
+{
+    "immatriculation": "PRO-000-03",
+    "marque": "Simca",
+    "modele": "Simca 1000",
+    "categorie": "Citadine",
+    "nbPlaces": 4,
+    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
+    "statutVehicule": "n'importe quoi"
+}
+```
+
+- Response :
+```
+{
+    "immatriculation": "PRO-000-03",
+    "marque": "Simca",
+    "modele": "Simca 1000",
+    "categorie": "Citadine",
+    "nbPlaces": 4,
+    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
+    "statutVehicule": "EN_SERVICE"
 }
 ```
