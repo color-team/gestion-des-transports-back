@@ -209,7 +209,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "Citadine",
         "nbPlaces": 4,
         "photoUrl": "https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 1
     },
     {
         "immatriculation": "PRO-000-02",
@@ -218,7 +219,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "CoupÃ©",
         "nbPlaces": 4,
         "photoUrl": "https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 2
     },
     {
         "immatriculation": "PRO-000-03",
@@ -227,7 +229,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "Citadine",
         "nbPlaces": 4,
         "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 3
     }
 ]
 ```
@@ -269,6 +272,7 @@ ou :
     "categorie": "Citadine",
     "nbPlaces": 4,
     "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
-    "statutVehicule": "EN_SERVICE"
+    "statutVehicule": "EN_SERVICE",
+    "id": null
 }
 ```
