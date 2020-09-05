@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import dev.controller.dto.ChauffeurDto;
 import dev.controller.mapper.UtilisateurChauffeurMapper;
 import dev.domain.Utilisateur;
+import dev.domain.enumeration.Role;
 import dev.repository.UtilisateurRepo;
 
 @Service
@@ -29,8 +30,8 @@ public class UtilisateurService {
 	}
 	
 	public List<ChauffeurDto> listerChauffeurs() {
-		return collegueRep.findByRole( "ROLE_CHAUFFEUR").stream()
-				.map( user -> mapper.toChauffeurDto( user))
+		return collegueRep.findByRole( Role.ROLE_CHAUFFEUR).stream()
+				.map( user -> mapper.toChauffeurDto(user))
 				.collect( Collectors.toList());
     }
 

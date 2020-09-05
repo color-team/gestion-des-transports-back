@@ -13,8 +13,11 @@ public class UtilisateurChauffeurMapper {
 				utilisateur.getId(), 
 				utilisateur.getNom(), 
 				utilisateur.getPrenom(), 
-				utilisateur.getMatricule(), 
-				utilisateur.getEmail());
+				utilisateur.getMatricule(),
+				utilisateur.getEmail(),
+				utilisateur.getCategoriePermis(),
+				utilisateur.getPhotUrl(),
+				utilisateur.getTelephone());
 	}
 
 }

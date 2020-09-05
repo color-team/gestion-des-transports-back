@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +25,12 @@ public class Utilisateur {
     protected String motDePasse;
     
     protected String matricule;
+    
+    protected String categoriePermis;
+    
+    protected String photUrl;
+    
+    protected String telephone;
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     protected List<RoleUtilisateur> roles;
@@ -46,14 +51,28 @@ public class Utilisateur {
     protected List<ReservationCovoituragePassager> reservationsCovoituragePassagers;
 
     public Utilisateur() {}
-    
-    public Utilisateur(String nom, String prenom, String email, String motDePasse, String matricule,
+
+	public Utilisateur(String nom, String prenom, String email, String motDePasse, String matricule,
 			List<RoleUtilisateur> roles) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.motDePasse = motDePasse;
 		this.matricule = matricule;
+		this.roles = roles;
+	}
+	
+	public Utilisateur(Long id, String nom, String prenom, String email, String motDePasse, String matricule,
+			String categorie_permis, String photUrl, String telephone, List<RoleUtilisateur> roles) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+		this.matricule = matricule;
+		this.categoriePermis = categorie_permis;
+		this.photUrl = photUrl;
+		this.telephone = telephone;
 		this.roles = roles;
 	}
     
@@ -115,6 +134,48 @@ public class Utilisateur {
 
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
+	}
+
+	/**
+	 * @return the categorie_permis
+	 */
+	public String getCategoriePermis() {
+		return categoriePermis;
+	}
+
+	/**
+	 * @param categorie_permis the categorie_permis to set
+	 */
+	public void setCategoriePermis(String categorie_permis) {
+		this.categoriePermis = categorie_permis;
+	}
+
+	/**
+	 * @return the photUrl
+	 */
+	public String getPhotUrl() {
+		return photUrl;
+	}
+
+	/**
+	 * @param photUrl the photUrl to set
+	 */
+	public void setPhotUrl(String photUrl) {
+		this.photUrl = photUrl;
+	}
+
+	/**
+	 * @return the telephone
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/**
+	 * @param telephone the telephone to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public List<ReservationCovoiturage> getAnnoncesCovoiturage() {
