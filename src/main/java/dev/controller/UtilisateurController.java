@@ -18,9 +18,11 @@ import dev.service.UtilisateurService;
 public class UtilisateurController {
 	
 	protected UtilisateurService service;
-	
+
+	/**
+	 * @param service
+	 */
 	public UtilisateurController(UtilisateurService service) {
-		super();
 		this.service = service;
 	}
 
