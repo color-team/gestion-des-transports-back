@@ -107,7 +107,7 @@
 		<profile>
 			<id>dev-mysql</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
@@ -131,9 +131,9 @@
 		<profile>
 			<id>prod</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
-			<properties>
+			<!--<properties>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://${env.MYSQL_ADDON_HOST}:${env.MYSQL_ADDON_PORT}/${env.MYSQL_ADDON_DB}</jdbc.url>
 				<jdbc.user>${env.MYSQL_ADDON_USER}</jdbc.user>
@@ -142,7 +142,7 @@
 				<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
 				<jdbc.connections.max.active>2</jdbc.connections.max.active>
 				<app.version>${env.COMMIT_ID}</app.version>
-			</properties>
+			</properties>-->
 			<dependencies>
 				<dependency>
 					<groupId>mysql</groupId>
