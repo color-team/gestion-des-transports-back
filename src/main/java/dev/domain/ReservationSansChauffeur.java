@@ -23,8 +23,10 @@ public class ReservationSansChauffeur extends ReservationEntreprise {
 		super();
 	}
 
-	public ReservationSansChauffeur(LocalDateTime dateDepart, Localisation depart, Localisation destination,
-			Utilisateur conducteur, LocalDateTime dateArrivee, VehiculeEntreprise vehiculeEntreprise,
+	public ReservationSansChauffeur(
+			LocalDateTime dateDepart, LocalDateTime dateArrivee, 
+			Localisation depart, Localisation destination,
+			Utilisateur conducteur, VehiculeEntreprise vehiculeEntreprise,
 			StatutReservationEntreprise statutReservationEntreprise) {
 		super(dateDepart, depart, destination, dateArrivee, vehiculeEntreprise, statutReservationEntreprise);
 		this.conducteur = conducteur;

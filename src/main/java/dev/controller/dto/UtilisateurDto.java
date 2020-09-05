@@ -1,11 +1,11 @@
 package dev.controller.dto;
 
-import dev.domain.Utilisateur;
-import dev.domain.enumeration.Role;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import dev.domain.Utilisateur;
+import dev.domain.enumeration.Role;
 
 /**
  * Structure modèlisant un utilisateur servant à communiquer avec l'extérieur (WEB API).

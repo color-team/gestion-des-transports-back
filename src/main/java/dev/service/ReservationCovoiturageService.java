@@ -110,6 +110,7 @@ public class ReservationCovoiturageService {
 		return annonceCovoiturageDto;
 	}
 
+
 	public List<AnnonceCovoiturageDto> findAllInFuture() {
 		List<ReservationCovoiturage> reservationsCovoiturage = reservationCovoiturageRepo
 				.findByDateDepartAfter(LocalDateTime.now());
