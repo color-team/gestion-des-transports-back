@@ -16,7 +16,7 @@ public interface UtilisateurRepo extends JpaRepository<Utilisateur, Long> {
     
     List<Utilisateur> findByMatricule(String matricule);
     
-    @Query("select new dev.controller.dto.ChauffeurDto(u.id, u.nom, u.prenom, u.matricule, u.email)"+" from Utilisateur u inner join RoleUtilisateur r on r.utilisateur=u where r.role=:role")
-    List<ChauffeurDto> findByRole(@Param("role") String role);
+    @Query("select u from Utilisateur u join u.roles r where r.role= :role")
+    List<Utilisateur> findByRole(@Param("role") String role);
 
 }

@@ -1,10 +1,12 @@
 package dev.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.ChauffeurDto;
+import dev.controller.mapper.UtilisateurChauffeurMapper;
 import dev.domain.Utilisateur;
 import dev.repository.UtilisateurRepo;
 
@@ -12,17 +14,24 @@ import dev.repository.UtilisateurRepo;
 public class UtilisateurService {
 	
 	protected UtilisateurRepo collegueRep;
-
-	public UtilisateurService() {
-	}
 	
+	protected UtilisateurChauffeurMapper mapper;
+	
+	public UtilisateurService( UtilisateurRepo collegueRep, UtilisateurChauffeurMapper mapper) {
+		super();
+		this.collegueRep = collegueRep;
+		this.mapper = mapper;
+	}
+
 	public Utilisateur chercherParEmail (String email) {
 		return collegueRep.findByEmail(email)
 				.orElseThrow();
 	}
 	
 	public List<ChauffeurDto> listerChauffeurs() {
-		return collegueRep.findByRole("ROLE_CHAUFFEUR");
+		return collegueRep.findByRole( "ROLE_CHAUFFEUR").stream()
+				.map( user -> mapper.toChauffeurDto( user))
+				.collect( Collectors.toList());
     }
 
 }

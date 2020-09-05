@@ -19,6 +19,11 @@ public class UtilisateurController {
 	
 	protected UtilisateurService service;
 	
+	public UtilisateurController(UtilisateurService service) {
+		super();
+		this.service = service;
+	}
+
 	// GET /administrateur/chauffeurs
 		/**
 		 * Lister toutes les utilsateurs avec un role de Chauffeur
@@ -28,7 +33,7 @@ public class UtilisateurController {
 		@GetMapping("/chauffeurs")
 		@Secured("ROLE_ADMINISTRATEUR")
 		public ResponseEntity<List<ChauffeurDto>> listerChauffeurs() {
-			return ResponseEntity.status(HttpStatus.OK).body(service.listerChauffeurs());
+			return ResponseEntity.status(HttpStatus.OK).body( service.listerChauffeurs());
 		}
 
 }
