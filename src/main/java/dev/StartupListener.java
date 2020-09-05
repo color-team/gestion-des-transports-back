@@ -62,6 +62,9 @@ public class StartupListener {
         user1.setMotDePasse(passwordEncoder.encode("superpass"));
         user1.setRoles(Arrays.asList(new RoleUtilisateur(user1, Role.ROLE_ADMINISTRATEUR), new RoleUtilisateur(user1, Role.ROLE_COLLABORATEUR), new RoleUtilisateur(user1, Role.ROLE_CHAUFFEUR)));
         user1.setMatricule("AD-667-09-KK");
+        user1.setCategoriePermis("A");
+        user1.setPhotUrl("https://randomuser.me/api/portraits/men/9.jpg");
+        user1.setTelephone("0033656095487");
         this.utilisateurRepo.save(user1);
 
         Utilisateur user2 = new Utilisateur();
@@ -80,6 +83,9 @@ public class StartupListener {
         user3.setMotDePasse(passwordEncoder.encode("superpass"));
         user3.setRoles(Arrays.asList(new RoleUtilisateur(user3, Role.ROLE_COLLABORATEUR), new RoleUtilisateur(user3, Role.ROLE_CHAUFFEUR)));
         user3.setMatricule("DR-669-02-PQ");
+        user3.setCategoriePermis("C");
+        user3.setPhotUrl("https://randomuser.me/api/portraits/men/35.jpg");
+        user3.setTelephone("0033767094565");
         this.utilisateurRepo.save(user3);
         
         Utilisateur user4 = new Utilisateur();
