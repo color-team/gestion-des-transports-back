@@ -121,6 +121,30 @@ https://gestion-des-transports-back.herokuapp.com/
 ]
 ```
 
+* GET /reservations-covoiturage/conducteur
+-   Lister toutes les annonces de covoiturage d'un utilisateur connecté qu'il a publié étant conducteur du covoiturage de l'annonce
+
+```
+[
+    {
+        "id": 5,
+        "dateDepart": "2020-09-22T11:30:00",
+        "infosDepart": "Place de la RÃ©publique, Paris",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "nbPlacesDisponibles": 2,
+        "statutAnnonceCovoiturage": "PUBLIEE"
+    },
+    {
+        "id": 99,
+        "dateDepart": "2020-09-22T10:30:00",
+        "infosDepart": "Stade Pierre-Mauroy, Villeneuve-d'Ascq",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "nbPlacesDisponibles": 3,
+        "statutAnnonceCovoiturage": "PUBLIEE"
+    }
+]
+```
+
 * POST /reservations-covoiturage
 -   Créer une annonce de covoiturage
 
