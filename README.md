@@ -56,12 +56,22 @@ https://gestion-des-transports-back.herokuapp.com/
 ```
 [
     {
+        "dateDepart": "2020-09-17T09:10:00",
+        "infosDepart": "31 Rue de la paix, Paris",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "statutReservationCovoiturage": "DEMANDEE",
+        "infosVehiculeParticulier": "Ford Focus",
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE"
+    },
+    {
         "dateDepart": "2020-09-25T12:30:00",
         "infosDepart": "31 Rue de la paix, Paris",
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE"
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -69,7 +79,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER5"
+        "infosConducteur": "DEV USER5",
+        "statutAnnonceCovoiturage": "TERMINEE"
     }
 ]
 ```
@@ -86,7 +97,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Marseille-St-Charles, Marseille",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE"
     },
     {
         "dateDepart": "2020-09-25T12:30:00",
@@ -94,7 +106,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE"
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -102,7 +115,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER5"
+        "infosConducteur": "DEV USER5",
+        "statutAnnonceCovoiturage": "TERMINEE"
     }
 ]
 ```
@@ -112,7 +126,7 @@ https://gestion-des-transports-back.herokuapp.com/
 
 -   Request :
 ```
- {
+{
     "conducteur": "AD-667-09-KK",
     "dateDepart":"2020-09-13T11:26",
     "depart":"Paris",
@@ -135,7 +149,8 @@ https://gestion-des-transports-back.herokuapp.com/
     "infosDestination": "Marseille",
     "statutReservationCovoiturage": null,
     "infosVehiculeParticulier": "Opel Corsa",
-    "infosConducteur": "AD-667-09-KK"
+    "infosConducteur": "AD-667-09-KK",
+    "statutAnnonceCovoiturage": null
 }
 ```
 
