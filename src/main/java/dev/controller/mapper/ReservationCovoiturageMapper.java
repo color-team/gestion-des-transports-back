@@ -36,7 +36,9 @@ public class ReservationCovoiturageMapper {
 				reservationCovoituragePassager.getStatutReservationCovoiturage().getStatutReservationCovoiturage()
 						.name(),
 				reservationCovoituragePassager.getReservationCovoiturage().getVehiculeParticulier().getInfos(),
-				reservationCovoituragePassager.getReservationCovoiturage().getConducteur().getInfos());
+				reservationCovoituragePassager.getReservationCovoiturage().getConducteur().getInfos(),
+				reservationCovoituragePassager.getReservationCovoiturage().getStatutAnnonceCovoiturage().getStatutAnnonceCovoiturage().name()
+				);
 	}
 
 	public ReservationCovoiturage fromDto(AnnonceCovoiturageCreerDto annonce, Utilisateur conducteur) {

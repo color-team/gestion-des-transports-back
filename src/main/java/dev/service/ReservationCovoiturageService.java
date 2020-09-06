@@ -8,14 +8,17 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.controller.mapper.ReservationCovoiturageMapper;
 import dev.domain.ReservationCovoiturage;
 import dev.domain.ReservationCovoituragePassager;
+import dev.domain.StatutAnnonceCovoiturage;
 import dev.domain.StatutReservationCovoiturage;
 import dev.domain.Utilisateur;
+import dev.domain.enumeration.StatutAnnonceCovoiturageEnum;
 import dev.domain.enumeration.StatutReservationCovoiturageEnum;
 import dev.repository.ReservationCovoituragePassagerRepository;
 import dev.repository.ReservationCovoiturageRepository;
@@ -45,6 +48,8 @@ public class ReservationCovoiturageService {
 	public ReservationCovoiturage create(AnnonceCovoiturageCreerDto annonceCovoitDto) {
 		Utilisateur conducteur = utilisateurRepo.findByMatricule(annonceCovoitDto.getConducteur()).get(0);
 		ReservationCovoiturage resaCovoit = resaCovoitMapper.fromDto(annonceCovoitDto, conducteur);
+		// Il faut valoriser le statutAnnonceCovoiturage avant de persister
+		resaCovoit.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(resaCovoit, StatutAnnonceCovoiturageEnum.PUBLIEE));
 		reservationCovoiturageRepo.save(resaCovoit);
 
 		return resaCovoit;
@@ -116,6 +121,7 @@ public class ReservationCovoiturageService {
 				.findByDateDepartAfter(LocalDateTime.now());
 
 		return reservationsCovoiturage.stream()
+				.filter(reservationCovoiturage -> reservationCovoiturage.getStatutAnnonceCovoiturage().getStatutAnnonceCovoiturage() == StatutAnnonceCovoiturageEnum.PUBLIEE)
 				.map(reservationCovoiturage -> this.resaCovoitMapper.toAnnonceCovoiturageDto(reservationCovoiturage))
 				.collect(Collectors.toList());
 	}
@@ -134,6 +140,16 @@ public class ReservationCovoiturageService {
 				.stream()
 				.map(reservationCovoituragePassager -> resaCovoitMapper
 						.ReservationCovoituragePassagerToDto(reservationCovoituragePassager))
+				.collect(Collectors.toList());
+	}
+	
+	public List<AnnonceCovoiturageConducteurDto> findByConducteurConnecte() {
+
+		return reservationCovoiturageRepo
+				.findByConducteurMatricule(
+						utilisateurRepo.findByEmail(securityService.getUserEmail()).get().getMatricule())
+				.stream()
+				.map(AnnonceCovoiturageConducteurDto::new)
 				.collect(Collectors.toList());
 	}
 }

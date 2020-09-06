@@ -15,6 +15,8 @@ public class ReservationCovoiturageDto {
 	protected String infosVehiculeParticulier;
 
 	protected String infosConducteur;
+	
+	protected String statutAnnonceCovoiturage;
 
 	public ReservationCovoiturageDto() {
 	}
@@ -28,6 +30,18 @@ public class ReservationCovoiturageDto {
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
 		this.infosVehiculeParticulier = infosVehiculeParticulier;
 		this.infosConducteur = infosConducteur;
+	}
+	
+	public ReservationCovoiturageDto(LocalDateTime dateDepart, String infosDepart, String infosDestination,
+			String statutReservationCovoiturage, String infosVehiculeParticulier, String infosConducteur, String statutAnnonceCovoiturage) {
+		super();
+		this.dateDepart = dateDepart;
+		this.infosDepart = infosDepart;
+		this.infosDestination = infosDestination;
+		this.statutReservationCovoiturage = statutReservationCovoiturage;
+		this.infosVehiculeParticulier = infosVehiculeParticulier;
+		this.infosConducteur = infosConducteur;
+		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
 	}
 
 	public LocalDateTime getDateDepart() {
@@ -76,5 +90,13 @@ public class ReservationCovoiturageDto {
 
 	public void setInfosConducteur(String infosConducteur) {
 		this.infosConducteur = infosConducteur;
+	}
+
+	public String getStatutAnnonceCovoiturage() {
+		return statutAnnonceCovoiturage;
+	}
+
+	public void setStatutAnnonceCovoiturage(String statutAnnonceCovoiturage) {
+		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
 	}
 }

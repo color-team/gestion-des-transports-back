@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
 import dev.controller.dto.CodeErreur;
@@ -39,7 +40,8 @@ public class ReservationCovoiturageController {
 
 	// GET /reservations-covoiturage
 	/**
-	 * Lister toutes les annonces de covoiturages dans le futur
+	 * Lister toutes les annonces de covoiturages dans le futur dont le statut est
+	 * "PUBLIEE"
 	 * 
 	 * @return
 	 */
@@ -70,6 +72,19 @@ public class ReservationCovoiturageController {
 	@GetMapping("/{matricule}")
 	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
+	}
+
+	// GET /reservations-covoiturage/conducteur
+	/**
+	 * Lister toutes les annonces de covoiturage d'un utilisateur connecté (qu'il a
+	 * publié étant conducteur)
+	 * 
+	 * @param matricule
+	 * @return
+	 */
+	@GetMapping("/conducteur")
+	public ResponseEntity<List<AnnonceCovoiturageConducteurDto>> findByConducteurConnecte() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findByConducteurConnecte());
 	}
 
 //AL

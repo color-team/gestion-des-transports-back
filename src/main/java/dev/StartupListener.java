@@ -124,6 +124,48 @@ public class StartupListener {
         user8.setMatricule("US-666-08-BK");
         this.utilisateurRepo.save(user8);
         
+        Utilisateur user9 = new Utilisateur();
+        user9.setNom("Julo");
+        user9.setPrenom("DEV");
+        user9.setEmail("souleymanethiam22@gmail.com");
+        user9.setMotDePasse(passwordEncoder.encode("superpass"));
+        user9.setRoles(Arrays.asList(new RoleUtilisateur(user9, Role.ROLE_COLLABORATEUR), new RoleUtilisateur(user9, Role.ROLE_CHAUFFEUR)));
+        user9.setMatricule("DR-669-09-PQ");
+        user9.setCategoriePermis("C");
+        user9.setPhotUrl("https://randomuser.me/api/portraits/women/39.jpg");
+        user9.setTelephone("0033769696969");
+        this.utilisateurRepo.save(user9);
+        
+        Utilisateur teamColor = new Utilisateur();
+        teamColor.setNom("Team Color");
+        teamColor.setPrenom("DEV");
+        teamColor.setEmail("color.team.dta@gmail.com");
+        teamColor.setMotDePasse(passwordEncoder.encode("superpass"));
+        teamColor.setRoles(Arrays.asList(new RoleUtilisateur(teamColor, Role.ROLE_COLLABORATEUR)));
+        teamColor.setMatricule("DR-666-66-PQ");
+        teamColor.setPhotUrl("https://randomuser.me/api/portraits/men/10.jpg");
+        this.utilisateurRepo.save(teamColor);
+        
+        Utilisateur koulk = new Utilisateur();
+        koulk.setNom("Koulk");
+        koulk.setPrenom("Zbda");
+        koulk.setEmail("koulkzbda@gmail.com");
+        koulk.setMotDePasse(passwordEncoder.encode("superpass"));
+        koulk.setRoles(Arrays.asList(new RoleUtilisateur(koulk, Role.ROLE_COLLABORATEUR)));
+        koulk.setMatricule("XD-666-66-GG");
+        koulk.setPhotUrl("https://randomuser.me/api/portraits/men/11.jpg");
+        this.utilisateurRepo.save(koulk);
+        
+        Utilisateur alprodh = new Utilisateur();
+        alprodh.setNom("Alprodh");
+        alprodh.setPrenom("DEV");
+        alprodh.setEmail("alexis.prodhom@hotmail.fr");
+        alprodh.setMotDePasse(passwordEncoder.encode("superpass"));
+        alprodh.setRoles(Arrays.asList(new RoleUtilisateur(alprodh, Role.ROLE_COLLABORATEUR)));
+        alprodh.setMatricule("PD-404-66-BG");
+        alprodh.setPhotUrl("https://randomuser.me/api/portraits/women/69.jpg");
+        this.utilisateurRepo.save(alprodh);
+        
         //  Création d'un véhicule particulier
 
         VehiculeParticulier vehiculeParticulier1 = new VehiculeParticulier(
@@ -140,6 +182,7 @@ public class StartupListener {
         		(byte) 4,
         		vehiculeParticulier1
         );
+        covoit1.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(covoit1, StatutAnnonceCovoiturageEnum.PUBLIEE));
         this.reservationCovoiturageRepository.save(covoit1);
         
         ReservationCovoituragePassager reservationsCovoituragePassagers1a = new ReservationCovoituragePassager(user5, covoit1, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
@@ -148,6 +191,7 @@ public class StartupListener {
         this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers1b);
         
         ReservationCovoiturage covoit2 = new ReservationCovoiturage(LocalDateTime.of(2020,9,25,12,30), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user2, (byte) 4, vehiculeParticulier1);
+        covoit2.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(covoit2, StatutAnnonceCovoiturageEnum.PUBLIEE));
         this.reservationCovoiturageRepository.save(covoit2);
         
         ReservationCovoituragePassager reservationsCovoituragePassagers2a = new ReservationCovoituragePassager(user8, covoit2, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
@@ -157,12 +201,45 @@ public class StartupListener {
         
         
         ReservationCovoiturage covoit3 = new ReservationCovoiturage(LocalDateTime.of(2020,8,19,14,00), new Localisation("31 Rue de la paix, Paris", "Paris", 75000, 48.8534f , 2.3488f), new Localisation("Gare de Toulouse-Matabiau, Toulouse", "Toulouse", 31000, 43.60f , 1.433333f), user5, (byte) 4, vehiculeParticulier1);
+        covoit3.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(covoit3, StatutAnnonceCovoiturageEnum.TERMINEE));
         this.reservationCovoiturageRepository.save(covoit3);
         
         ReservationCovoituragePassager reservationsCovoituragePassagers3a = new ReservationCovoituragePassager(user8, covoit3, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
         ReservationCovoituragePassager reservationsCovoituragePassagers3b = new ReservationCovoituragePassager(user7, covoit3, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.TERMINEE));
         this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers3a);
         this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers3b);
+        
+        ReservationCovoiturage covoit4 = new ReservationCovoiturage(
+        		LocalDateTime.of(2020,9,19,10,30),
+        		new Localisation("Porte d'Italie, Paris", "Paris", 75000, 48.8534f , 2.3488f),
+        		new Localisation("Gare de Marseille-St-Charles, Marseille", "Marseille", 13000, 43.3f , 5.4f),
+        		alprodh,
+        		(byte) 4,
+        		vehiculeParticulier1
+        );
+        covoit4.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(covoit4, StatutAnnonceCovoiturageEnum.PUBLIEE));
+        this.reservationCovoiturageRepository.save(covoit4);
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers4a = new ReservationCovoituragePassager(koulk, covoit4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers4b = new ReservationCovoituragePassager(teamColor, covoit4, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers4a);
+        this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers4b);
+        
+        ReservationCovoiturage covoit5 = new ReservationCovoiturage(
+        		LocalDateTime.of(2020,9,22,11,30),
+        		new Localisation("Place de la République, Paris", "Paris", 75000, 48.8534f , 2.3488f),
+        		new Localisation("Gare de Marseille-St-Charles, Marseille", "Marseille", 13000, 43.3f , 5.4f),
+        		koulk,
+        		(byte) 4,
+        		vehiculeParticulier1
+        );
+        covoit5.setStatutAnnonceCovoiturage(new StatutAnnonceCovoiturage(covoit5, StatutAnnonceCovoiturageEnum.PUBLIEE));
+        this.reservationCovoiturageRepository.save(covoit5);
+        
+        ReservationCovoituragePassager reservationsCovoituragePassagers5a = new ReservationCovoituragePassager(alprodh, covoit5, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        ReservationCovoituragePassager reservationsCovoituragePassagers5b = new ReservationCovoituragePassager(teamColor, covoit5, new StatutReservationCovoiturage(null, StatutReservationCovoiturageEnum.DEMANDEE));
+        this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers5a);
+        this.reservationCovoituragePassagerRepository.save(reservationsCovoituragePassagers5b);
         
         // Création de véhicules entreprise
         byte nbPlaces = 4;
