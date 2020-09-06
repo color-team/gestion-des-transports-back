@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
 import dev.controller.dto.CodeErreur;
 import dev.controller.dto.MessageErreurDto;
 import dev.controller.dto.ReservationCovoiturageDto;
+import dev.controller.dto.ReservationCovoiturageUpdateStatutReservationDto;
 import dev.domain.ReservationCovoiturage;
 import dev.exception.ReservationCovoiturageInvalideException;
 import dev.service.ReservationCovoiturageService;
@@ -39,7 +42,8 @@ public class ReservationCovoiturageController {
 
 	// GET /reservations-covoiturage
 	/**
-	 * Lister toutes les annonces de covoiturages dans le futur
+	 * Lister toutes les annonces de covoiturages dans le futur dont le statut est
+	 * "PUBLIEE"
 	 * 
 	 * @return
 	 */
@@ -70,6 +74,19 @@ public class ReservationCovoiturageController {
 	@GetMapping("/{matricule}")
 	public ResponseEntity<List<ReservationCovoiturageDto>> findByPassagerMatricule(@PathVariable String matricule) {
 		return ResponseEntity.status(HttpStatus.OK).body(service.findByPassagerMatricule(matricule));
+	}
+
+	// GET /reservations-covoiturage/conducteur
+	/**
+	 * Lister toutes les annonces de covoiturage d'un utilisateur connecté (qu'il a
+	 * publié étant conducteur)
+	 * 
+	 * @param matricule
+	 * @return
+	 */
+	@GetMapping("/conducteur")
+	public ResponseEntity<List<AnnonceCovoiturageConducteurDto>> findByConducteurConnecte() {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findByConducteurConnecte());
 	}
 
 //AL
@@ -135,6 +152,25 @@ public class ReservationCovoiturageController {
 
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(service.addPassagerByMatricule(annonceCovoiturageDto, matricule));
+	}
+	
+	// PATCH /reservations-covoiturage
+	/**
+	 * Ajouter l'utilisateur connecté comme passager d'une annonce de covoiturage
+	 * 
+	 * @param annonceCovoiturageDto
+	 * @param result
+	 * @return
+	 */
+	@PatchMapping
+	public ResponseEntity<?> annulerReservation(@RequestBody @Valid ReservationCovoiturageUpdateStatutReservationDto updateStatutDto,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			throw new ReservationCovoiturageInvalideException(
+					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(service.annulerReservation(updateStatutDto));
 	}
 
 }
