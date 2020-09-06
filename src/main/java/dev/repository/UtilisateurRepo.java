@@ -18,5 +18,10 @@ public interface UtilisateurRepo extends JpaRepository<Utilisateur, Long> {
     
     @Query("select u from Utilisateur u join u.roles r where r.role= :role")
     List<Utilisateur> findByRole(@Param("role") Role role);
-
+    
+    @Query("select u from Utilisateur u where u.matricule= :matricule")
+    Optional<Utilisateur> findByMatriculeUtilisateur(@Param("matricule") String matricule);
+    
+    Optional<Utilisateur> findById(Long id);
+    
 }
