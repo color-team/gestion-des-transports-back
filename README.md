@@ -62,7 +62,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER",
-        "statutAnnonceCovoiturage": "PUBLIEE"
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 1
     },
     {
         "dateDepart": "2020-09-25T12:30:00",
@@ -71,7 +72,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER",
-        "statutAnnonceCovoiturage": "PUBLIEE"
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 2
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -80,7 +82,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER5",
-        "statutAnnonceCovoiturage": "TERMINEE"
+        "statutAnnonceCovoiturage": "TERMINEE",
+        "id": 3
     }
 ]
 ```
@@ -98,7 +101,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER",
-        "statutAnnonceCovoiturage": "PUBLIEE"
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 1
     },
     {
         "dateDepart": "2020-09-25T12:30:00",
@@ -107,7 +111,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER",
-        "statutAnnonceCovoiturage": "PUBLIEE"
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 2
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -116,7 +121,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
         "infosConducteur": "DEV USER5",
-        "statutAnnonceCovoiturage": "TERMINEE"
+        "statutAnnonceCovoiturage": "TERMINEE",
+        "id": 3
     }
 ]
 ```
