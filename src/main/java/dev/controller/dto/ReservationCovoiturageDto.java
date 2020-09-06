@@ -17,13 +17,14 @@ public class ReservationCovoiturageDto {
 	protected String infosConducteur;
 	
 	protected String statutAnnonceCovoiturage;
+	
+	protected Long id;
 
 	public ReservationCovoiturageDto() {
 	}
 
 	public ReservationCovoiturageDto(LocalDateTime dateDepart, String infosDepart, String infosDestination,
 			String statutReservationCovoiturage, String infosVehiculeParticulier, String infosConducteur) {
-		super();
 		this.dateDepart = dateDepart;
 		this.infosDepart = infosDepart;
 		this.infosDestination = infosDestination;
@@ -34,7 +35,6 @@ public class ReservationCovoiturageDto {
 	
 	public ReservationCovoiturageDto(LocalDateTime dateDepart, String infosDepart, String infosDestination,
 			String statutReservationCovoiturage, String infosVehiculeParticulier, String infosConducteur, String statutAnnonceCovoiturage) {
-		super();
 		this.dateDepart = dateDepart;
 		this.infosDepart = infosDepart;
 		this.infosDestination = infosDestination;
@@ -42,6 +42,18 @@ public class ReservationCovoiturageDto {
 		this.infosVehiculeParticulier = infosVehiculeParticulier;
 		this.infosConducteur = infosConducteur;
 		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
+	}
+	
+	public ReservationCovoiturageDto(LocalDateTime dateDepart, String infosDepart, String infosDestination,
+			String statutReservationCovoiturage, String infosVehiculeParticulier, String infosConducteur, String statutAnnonceCovoiturage, Long id) {
+		this.dateDepart = dateDepart;
+		this.infosDepart = infosDepart;
+		this.infosDestination = infosDestination;
+		this.statutReservationCovoiturage = statutReservationCovoiturage;
+		this.infosVehiculeParticulier = infosVehiculeParticulier;
+		this.infosConducteur = infosConducteur;
+		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
+		this.id = id;
 	}
 
 	public LocalDateTime getDateDepart() {
@@ -98,5 +110,13 @@ public class ReservationCovoiturageDto {
 
 	public void setStatutAnnonceCovoiturage(String statutAnnonceCovoiturage) {
 		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
