@@ -25,7 +25,7 @@ https://gestion-des-transports-back.herokuapp.com/
 
 
 * GET /reservations-covoiturage
--   Lister toutes les annonces de covoiturages dans le futur
+-   Lister toutes les annonces de covoiturages dans le futur dont le statut est "PUBLIEE"
 
 ```
 [
