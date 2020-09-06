@@ -2,7 +2,7 @@ package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
-public class ReservationSansChauffeurInfosDto {
+public class ReservationEntrepriseInfosDto {
 
 	private String infosConducteur;
 	
@@ -13,17 +13,20 @@ public class ReservationSansChauffeurInfosDto {
 	private String infosVehicule;
 	
 	private String infosStatutReservation;
-
-	public ReservationSansChauffeurInfosDto() {}
 	
-	public ReservationSansChauffeurInfosDto(String infosConducteur, LocalDateTime dateDepart, LocalDateTime dateArrivee,
-			String infosVehicule, String infosStatutReservation) {
+	private boolean avecChauffeur;
+
+	public ReservationEntrepriseInfosDto() {}
+
+	public ReservationEntrepriseInfosDto(String infosConducteur, LocalDateTime dateDepart, LocalDateTime dateArrivee,
+			String infosVehicule, String infosStatutReservation, boolean avecChauffeur) {
 		super();
 		this.infosConducteur = infosConducteur;
 		this.dateDepart = dateDepart;
 		this.dateArrivee = dateArrivee;
 		this.infosVehicule = infosVehicule;
 		this.infosStatutReservation = infosStatutReservation;
+		this.avecChauffeur = avecChauffeur;
 	}
 
 	public String getInfosConducteur() {
@@ -64,5 +67,13 @@ public class ReservationSansChauffeurInfosDto {
 
 	public void setInfosStatutReservation(String infosStatutReservation) {
 		this.infosStatutReservation = infosStatutReservation;
+	}
+
+	public boolean isAvecChauffeur() {
+		return avecChauffeur;
+	}
+
+	public void setAvecChauffeur(boolean avecChauffeur) {
+		this.avecChauffeur = avecChauffeur;
 	}
 }
