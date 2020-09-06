@@ -2,33 +2,36 @@ package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
-public class ReservationSansChauffeurDto {
-	
-	private String conducteur;
+public class ReservationEntrepriseDto {
+
+	private String reservant;
 	
 	private LocalDateTime dateDepart;
 	
 	private LocalDateTime dateArrivee;
 	
 	private Long vehiculeId;
-
-	public ReservationSansChauffeurDto() {}
 	
-	public ReservationSansChauffeurDto( String conducteur, LocalDateTime dateDepart, LocalDateTime dateArrivee,
-			Long vehiculeId) {
+	private boolean avecChauffeur;
+
+	public ReservationEntrepriseDto() {}
+
+	public ReservationEntrepriseDto(String reservant, LocalDateTime dateDepart, LocalDateTime dateArrivee,
+			Long vehiculeId, boolean avecChauffeur) {
 		super();
-		this.conducteur = conducteur;
+		this.reservant = reservant;
 		this.dateDepart = dateDepart;
 		this.dateArrivee = dateArrivee;
 		this.vehiculeId = vehiculeId;
+		this.avecChauffeur = avecChauffeur;
 	}
 
-	public String getConducteur() {
-		return conducteur;
+	public String getReservant() {
+		return reservant;
 	}
 
-	public void setConducteur(String conducteur) {
-		this.conducteur = conducteur;
+	public void setReservant(String reservant) {
+		this.reservant = reservant;
 	}
 
 	public LocalDateTime getDateDepart() {
@@ -53,5 +56,13 @@ public class ReservationSansChauffeurDto {
 
 	public void setVehiculeId(Long vehiculeId) {
 		this.vehiculeId = vehiculeId;
+	}
+
+	public boolean isAvecChauffeur() {
+		return avecChauffeur;
+	}
+
+	public void setAvecChauffeur(boolean avecChauffeur) {
+		this.avecChauffeur = avecChauffeur;
 	}
 }

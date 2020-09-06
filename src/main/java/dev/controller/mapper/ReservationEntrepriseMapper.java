@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import dev.controller.dto.DispoResrvationSansChauffeurDto;
-import dev.controller.dto.ReservationSansChauffeurDto;
-import dev.controller.dto.ReservationSansChauffeurInfosDto;
+import dev.controller.dto.ReservationEntrepriseDto;
+import dev.controller.dto.ReservationEntrepriseInfosDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
+import dev.domain.ReservationChauffeur;
 import dev.domain.ReservationEntreprise;
 import dev.domain.ReservationSansChauffeur;
 import dev.domain.StatutReservationEntreprise;
@@ -16,7 +17,7 @@ import dev.domain.VehiculeEntreprise;
 import dev.domain.enumeration.StatutReservationEntrepriseEnum;
 
 @Component
-public class ReservationSansChauffeurMapper {
+public class ReservationEntrepriseMapper {
 	
 	public VehiculeSansChauffeurDto toVehiculeDto( VehiculeEntreprise vehicule) {
 		return new VehiculeSansChauffeurDto(
@@ -42,7 +43,7 @@ public class ReservationSansChauffeurMapper {
 				);
 	}
 	
-	public ReservationSansChauffeur dtoToReservation( ReservationSansChauffeurDto reservationDto, 
+	public ReservationSansChauffeur dtoToReservationSansChauffeur( ReservationEntrepriseDto reservationDto, 
 			VehiculeEntreprise vehicule, Utilisateur conducteur) {
 		
 		StatutReservationEntreprise statut = new StatutReservationEntreprise();
@@ -65,13 +66,47 @@ public class ReservationSansChauffeurMapper {
 		return reservation;
 	}
 	
-	public ReservationSansChauffeurInfosDto toReservationInfosDto( ReservationSansChauffeur reservation) {
-		return new ReservationSansChauffeurInfosDto(
+	public ReservationChauffeur dtoToReservationAvecChauffeur( ReservationEntrepriseDto reservationDto, 
+			VehiculeEntreprise vehicule, Utilisateur passager) {
+		
+		StatutReservationEntreprise statut = new StatutReservationEntreprise();
+		statut.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE);
+		
+		ReservationChauffeur reservation = new ReservationChauffeur(
+				reservationDto.getDateDepart(),
+				null,
+				null,
+				null,
+				reservationDto.getDateArrivee(),
+				vehicule,
+				statut,
+				passager);
+		
+        statut.setReservationEntreprise( reservation);
+        reservation.setStatutReservationEntreprise( statut);
+        vehicule.addReservationEntreprise( reservation);
+        reservation.setVehiculeEntreprise( vehicule);
+        
+		return reservation;
+	}
+	
+	public ReservationEntrepriseInfosDto sansChauffeurtoInfosDto( ReservationSansChauffeur reservation) {
+		return new ReservationEntrepriseInfosDto(
 				reservation.getConducteur().getInfos(),
 				reservation.getDateDepart(),
 				reservation.getDateArrivee(),
 				reservation.getVehiculeEntreprise().getInfos(),
-				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise().name());
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise().name(),
+				false);
 	}
-
+	
+	public ReservationEntrepriseInfosDto avecChauffeurtoInfosDto( ReservationChauffeur reservation) {
+		return new ReservationEntrepriseInfosDto(
+				reservation.getPassager().getInfos(),
+				reservation.getDateDepart(),
+				reservation.getDateArrivee(),
+				reservation.getVehiculeEntreprise().getInfos(),
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise().name(),
+				true);
+	}
 }
