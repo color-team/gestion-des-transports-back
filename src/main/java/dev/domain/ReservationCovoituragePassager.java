@@ -8,31 +8,38 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import dev.domain.enumeration.StatutReservationCovoiturageEnum;
+
 @Entity
-@Table(name="reservation_covoiturage_passager")
+@Table(name = "reservation_covoiturage_passager")
 public class ReservationCovoituragePassager {
-	
+
 	@EmbeddedId
 	private ReservationCovoituragePassagerKey id = new ReservationCovoituragePassagerKey();
- 
-    @ManyToOne
-    @MapsId(value = "utilisateurId")
-    protected Utilisateur passager;
- 
-    @ManyToOne
-    @MapsId(value = "reservationCovoiturageId")
-    protected ReservationCovoiturage reservationCovoiturage;
-    
-    @OneToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne
+	@MapsId(value = "utilisateurId")
+	protected Utilisateur passager;
+
+	@ManyToOne
+	@MapsId(value = "reservationCovoiturageId")
+	protected ReservationCovoiturage reservationCovoiturage;
+
+	@OneToOne(cascade = CascadeType.ALL)
 	protected StatutReservationCovoiturage statutReservationCovoiturage;
 
-    public ReservationCovoituragePassager() {}
-    
+	public ReservationCovoituragePassager() {
+	}
+
 	public ReservationCovoituragePassager(Utilisateur passager, ReservationCovoiturage reservationCovoiturage,
 			StatutReservationCovoiturage statutReservationCovoiturage) {
 		this.passager = passager;
 		this.reservationCovoiturage = reservationCovoiturage;
 		this.statutReservationCovoiturage = statutReservationCovoiturage;
+	}
+
+	public void cancelReservation() {
+		statutReservationCovoiturage.setStatutReservationCovoiturage(StatutReservationCovoiturageEnum.ANNULEE);
 	}
 
 	public ReservationCovoituragePassagerKey getId() {

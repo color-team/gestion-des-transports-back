@@ -1,6 +1,7 @@
 package dev.service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
 import dev.controller.dto.ReservationCovoiturageDto;
+import dev.controller.dto.ReservationCovoiturageUpdateStatutReservationDto;
 import dev.controller.mapper.ReservationCovoiturageMapper;
 import dev.domain.ReservationCovoiturage;
 import dev.domain.ReservationCovoituragePassager;
@@ -32,16 +34,18 @@ public class ReservationCovoiturageService {
 	protected UtilisateurRepo utilisateurRepo;
 	protected ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepo;
 	protected SecurityServiceImpl securityService;
+	protected EmailServiceImpl emailService;
 
 	public ReservationCovoiturageService(ReservationCovoiturageRepository reservationCovoiturageRepo,
 			ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepo,
 			UtilisateurRepo utilisateurRepo, SecurityServiceImpl securityService,
-			ReservationCovoiturageMapper resaCovoitMapper) {
+			ReservationCovoiturageMapper resaCovoitMapper, EmailServiceImpl emailService) {
 		this.reservationCovoiturageRepo = reservationCovoiturageRepo;
 		this.reservationCovoituragePassagerRepo = reservationCovoituragePassagerRepo;
 		this.utilisateurRepo = utilisateurRepo;
 		this.securityService = securityService;
 		this.resaCovoitMapper = resaCovoitMapper;
+		this.emailService = emailService;
 	}
 
 	@Transactional
@@ -151,5 +155,29 @@ public class ReservationCovoiturageService {
 				.stream()
 				.map(AnnonceCovoiturageConducteurDto::new)
 				.collect(Collectors.toList());
+	}
+	
+	public ReservationCovoiturageUpdateStatutReservationDto annulerReservation(ReservationCovoiturageUpdateStatutReservationDto updateStatutDto) {
+		ReservationCovoituragePassager reservationCovoituragePassager = reservationCovoituragePassagerRepo
+				.findByPassagerMatricule(
+						utilisateurRepo.findByEmail(securityService.getUserEmail()).get().getMatricule())
+				.stream().filter(reservation -> reservation.getReservationCovoiturage().getId() == updateStatutDto.getId())
+				.collect(Collectors.toList())
+				.get(0);
+		reservationCovoituragePassager.cancelReservation();
+		//  Repose sur le @OneToOne(cascade = CascadeType.ALL) entre ReservationCovoituragePassager et
+		//  StatutReservationCovoiturage
+		reservationCovoituragePassagerRepo.save(reservationCovoituragePassager);
+		EnvoyerEmailAnnulationReservation(reservationCovoituragePassager.getReservationCovoiturage(), securityService.getUserEmail());
+		
+		return new ReservationCovoiturageUpdateStatutReservationDto(reservationCovoituragePassager);
+	}
+	
+	protected void EnvoyerEmailAnnulationReservation(ReservationCovoiturage reservation, String email) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String text = "Votre réservation pour le " + reservation.getDateDepart().format(formatter) +
+			" de " + reservation.getDepart().getAdresse() + " à " + reservation.getDestination().getAdresse() +
+			" a bien été annulée.";
+		emailService.sendSimpleMessage(email, "Annulation de la réservation", text);
 	}
 }
