@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
+import dev.controller.dto.AnnonceCovoiturageUpdateStatutReservationDto;
 import dev.controller.dto.CodeErreur;
 import dev.controller.dto.MessageErreurDto;
 import dev.controller.dto.ReservationCovoiturageDto;
@@ -156,7 +157,7 @@ public class ReservationCovoiturageController {
 	
 	// PATCH /reservations-covoiturage
 	/**
-	 * Ajouter l'utilisateur connecté comme passager d'une annonce de covoiturage
+	 * Annuler la réservation d'un covoiturage dont l'id est passé dans le body d'un utilisateur connecté
 	 * 
 	 * @param annonceCovoiturageDto
 	 * @param result
@@ -171,6 +172,25 @@ public class ReservationCovoiturageController {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(service.annulerReservation(updateStatutDto));
+	}
+	
+	// PATCH /reservations-covoiturage/conducteur
+	/**
+	 * Annuler l'annonce d'un covoiturage dont l'id est passé dans le body d'un utilisateur connecté (en tant que conducteur de l'annonce)
+	 * 
+	 * @param annonceCovoiturageDto
+	 * @param result
+	 * @return
+	 */
+	@PatchMapping("/conducteur")
+	public ResponseEntity<?> annulerAnnonce(@RequestBody @Valid AnnonceCovoiturageUpdateStatutReservationDto updateStatutDto,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			throw new ReservationCovoiturageInvalideException(
+					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(service.annulerAnnonce(updateStatutDto));
 	}
 
 }
