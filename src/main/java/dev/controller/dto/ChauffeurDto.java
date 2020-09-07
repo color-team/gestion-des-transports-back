@@ -1,6 +1,5 @@
 package dev.controller.dto;
 
-
 public class ChauffeurDto {
 
 	 private long id;

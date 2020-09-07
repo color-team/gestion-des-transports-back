@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import dev.domain.enumeration.Role;
+
 @Entity
 public class Utilisateur {
 
@@ -59,6 +61,19 @@ public class Utilisateur {
 		this.email = email;
 		this.motDePasse = motDePasse;
 		this.matricule = matricule;
+		this.roles = roles;
+	}
+	
+	public Utilisateur( long id, String nom, String prenom, String matricule, String email, 
+			String categorie_permis, String photUrl, String telephone, List<RoleUtilisateur> roles) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.matricule = matricule;
+		this.categoriePermis = categorie_permis;
+		this.photUrl = photUrl;
+		this.telephone = telephone;
 		this.roles = roles;
 	}
 	
@@ -225,4 +240,13 @@ public class Utilisateur {
 	public void setReservationsCovoituragePassagers(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
 		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
 	}
+
+	public boolean containsRole(Role roleUtilisateur) {
+	    	boolean exist = false;
+	    	for(RoleUtilisateur roleC : this.roles) {
+	    		if(roleC.getRole().equals(roleUtilisateur))
+	    			exist = true;
+	    	}
+	    	return exist;
+	    }
 }
