@@ -53,6 +53,6 @@ public class ReservationEntrepriseController {
 	
 	@GetMapping("/{matricule}")
 	public ResponseEntity<List<ReservationEntrepriseAffichageDto>> findByUtilisateurMatricule( @PathVariable String matricule) {
-		return ResponseEntity.ok( service.findByUtilisateurMatricule (matricule));
+		return ResponseEntity.ok( service.findByUtilisateurMatricule(matricule));
 	}
 }
