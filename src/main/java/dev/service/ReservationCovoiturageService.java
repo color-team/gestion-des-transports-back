@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import dev.controller.dto.AnnonceCovoiturageConducteurDto;
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.AnnonceCovoiturageDto;
+import dev.controller.dto.AnnonceCovoiturageUpdateStatutReservationDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.controller.dto.ReservationCovoiturageUpdateStatutReservationDto;
 import dev.controller.mapper.ReservationCovoiturageMapper;
@@ -168,16 +169,46 @@ public class ReservationCovoiturageService {
 		//  Repose sur le @OneToOne(cascade = CascadeType.ALL) entre ReservationCovoituragePassager et
 		//  StatutReservationCovoiturage
 		reservationCovoituragePassagerRepo.save(reservationCovoituragePassager);
-		EnvoyerEmailAnnulationReservation(reservationCovoituragePassager.getReservationCovoiturage(), securityService.getUserEmail());
+		EnvoyerEmailAnnulationReservation(reservationCovoituragePassager.getReservationCovoiturage(), securityService.getUserEmail(), false);
 		
 		return new ReservationCovoiturageUpdateStatutReservationDto(reservationCovoituragePassager);
 	}
 	
-	protected void EnvoyerEmailAnnulationReservation(ReservationCovoiturage reservation, String email) {
+	public AnnonceCovoiturageUpdateStatutReservationDto annulerAnnonce(AnnonceCovoiturageUpdateStatutReservationDto updateStatutDto) {
+		ReservationCovoiturage reservationCovoiturage = reservationCovoiturageRepo
+				.findByConducteurMatricule(
+						utilisateurRepo.findByEmail(securityService.getUserEmail()).get().getMatricule())
+				.stream().filter(reservation -> reservation.getId() == updateStatutDto.getId())
+				.collect(Collectors.toList())
+				.get(0);
+		reservationCovoiturage.cancelAnnonceByConducteur();
+		//  Repose sur le @OneToOne(cascade = CascadeType.ALL) entre ReservationCovoiturage et
+		//  StatutAnnonceCovoiturage
+		reservationCovoiturageRepo.save(reservationCovoiturage);
+		EnvoyerEmailAnnulationAnnonce(reservationCovoiturage, securityService.getUserEmail());
+		reservationCovoiturage.getReservationsCovoituragePassagers().
+		forEach(rerservation -> {
+			EnvoyerEmailAnnulationReservation(reservationCovoiturage, rerservation.getPassager().getEmail(), true);
+			rerservation.cancelReservation();
+		});
+		
+		return new AnnonceCovoiturageUpdateStatutReservationDto(reservationCovoiturage);
+	}
+	
+	protected void EnvoyerEmailAnnulationReservation(ReservationCovoiturage reservation, String email, boolean parConducteur) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String finMessage = parConducteur ? " par le conducteur de l'annonce." : ".";
 		String text = "Votre réservation pour le " + reservation.getDateDepart().format(formatter) +
 			" de " + reservation.getDepart().getAdresse() + " à " + reservation.getDestination().getAdresse() +
-			" a bien été annulée.";
+			" a été annulée" + finMessage;
 		emailService.sendSimpleMessage(email, "Annulation de la réservation", text);
+	}
+	
+	protected void EnvoyerEmailAnnulationAnnonce(ReservationCovoiturage reservation, String email) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String text = "Votre annonce pour le " + reservation.getDateDepart().format(formatter) +
+			" de " + reservation.getDepart().getAdresse() + " à " + reservation.getDestination().getAdresse() +
+			" a bien été annulée.";
+		emailService.sendSimpleMessage(email, "Annulation de l'annonce", text);
 	}
 }

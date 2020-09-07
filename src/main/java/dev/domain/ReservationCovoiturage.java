@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import dev.domain.enumeration.StatutAnnonceCovoiturageEnum;
 import dev.domain.enumeration.StatutReservationCovoiturageEnum;
 
 @Entity
@@ -79,6 +80,10 @@ public class ReservationCovoiturage extends Reservation {
 		this.vehiculeParticulier = vehiculeParticulier;
 		this.conducteur = conducteur;
 		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
+	}
+	
+	public void cancelAnnonceByConducteur() {
+		statutAnnonceCovoiturage.setStatutAnnonceCovoiturage(StatutAnnonceCovoiturageEnum.ANNULEE_PAR_CONDUCTEUR);
 	}
 	
 	public int getNbPlacesDisponibles() {
