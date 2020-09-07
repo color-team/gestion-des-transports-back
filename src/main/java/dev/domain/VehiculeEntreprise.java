@@ -69,7 +69,7 @@ public class VehiculeEntreprise extends Vehicule {
 		this.statutVehicule = statutVehicule;
 	}
 
-	public void addReservationEntreprise(ReservationSansChauffeur reservationSansChauffeur) {
-		reservationsEntreprise.add(reservationSansChauffeur);
+	public void addReservationEntreprise(ReservationEntreprise reservationEntreprise) {
+		reservationsEntreprise.add(reservationEntreprise);
 	}
 }

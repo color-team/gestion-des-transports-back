@@ -25,7 +25,7 @@ https://gestion-des-transports-back.herokuapp.com/
 
 
 * GET /reservations-covoiturage
--   Lister toutes les annonces de covoiturages dans le futur
+-   Lister toutes les annonces de covoiturages dans le futur dont le statut est "PUBLIEE"
 
 ```
 [
@@ -56,12 +56,24 @@ https://gestion-des-transports-back.herokuapp.com/
 ```
 [
     {
+        "dateDepart": "2020-09-17T09:10:00",
+        "infosDepart": "31 Rue de la paix, Paris",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "statutReservationCovoiturage": "DEMANDEE",
+        "infosVehiculeParticulier": "Ford Focus",
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 1
+    },
+    {
         "dateDepart": "2020-09-25T12:30:00",
         "infosDepart": "31 Rue de la paix, Paris",
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 2
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -69,7 +81,9 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER5"
+        "infosConducteur": "DEV USER5",
+        "statutAnnonceCovoiturage": "TERMINEE",
+        "id": 3
     }
 ]
 ```
@@ -86,7 +100,9 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Marseille-St-Charles, Marseille",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 1
     },
     {
         "dateDepart": "2020-09-25T12:30:00",
@@ -94,7 +110,9 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "DEMANDEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER"
+        "infosConducteur": "DEV USER",
+        "statutAnnonceCovoiturage": "PUBLIEE",
+        "id": 2
     },
     {
         "dateDepart": "2020-08-19T14:00:00",
@@ -102,7 +120,33 @@ https://gestion-des-transports-back.herokuapp.com/
         "infosDestination": "Gare de Toulouse-Matabiau, Toulouse",
         "statutReservationCovoiturage": "TERMINEE",
         "infosVehiculeParticulier": "Ford Focus",
-        "infosConducteur": "DEV USER5"
+        "infosConducteur": "DEV USER5",
+        "statutAnnonceCovoiturage": "TERMINEE",
+        "id": 3
+    }
+]
+```
+
+* GET /reservations-covoiturage/conducteur
+-   Lister toutes les annonces de covoiturage d'un utilisateur connecté qu'il a publié étant conducteur du covoiturage de l'annonce
+
+```
+[
+    {
+        "id": 5,
+        "dateDepart": "2020-09-22T11:30:00",
+        "infosDepart": "Place de la RÃ©publique, Paris",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "nbPlacesDisponibles": 2,
+        "statutAnnonceCovoiturage": "PUBLIEE"
+    },
+    {
+        "id": 99,
+        "dateDepart": "2020-09-22T10:30:00",
+        "infosDepart": "Stade Pierre-Mauroy, Villeneuve-d'Ascq",
+        "infosDestination": "Gare de Marseille-St-Charles, Marseille",
+        "nbPlacesDisponibles": 3,
+        "statutAnnonceCovoiturage": "PUBLIEE"
     }
 ]
 ```
@@ -112,7 +156,7 @@ https://gestion-des-transports-back.herokuapp.com/
 
 -   Request :
 ```
- {
+{
     "conducteur": "AD-667-09-KK",
     "dateDepart":"2020-09-13T11:26",
     "depart":"Paris",
@@ -135,7 +179,8 @@ https://gestion-des-transports-back.herokuapp.com/
     "infosDestination": "Marseille",
     "statutReservationCovoiturage": null,
     "infosVehiculeParticulier": "Opel Corsa",
-    "infosConducteur": "AD-667-09-KK"
+    "infosConducteur": "AD-667-09-KK",
+    "statutAnnonceCovoiturage": null
 }
 ```
 
@@ -209,7 +254,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "Citadine",
         "nbPlaces": 4,
         "photoUrl": "https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 1
     },
     {
         "immatriculation": "PRO-000-02",
@@ -218,7 +264,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "CoupÃ©",
         "nbPlaces": 4,
         "photoUrl": "https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 2
     },
     {
         "immatriculation": "PRO-000-03",
@@ -227,7 +274,8 @@ https://gestion-des-transports-back.herokuapp.com/
         "categorie": "Citadine",
         "nbPlaces": 4,
         "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
-        "statutVehicule": "EN_SERVICE"
+        "statutVehicule": "EN_SERVICE",
+        "id": 3
     }
 ]
 ```
@@ -269,6 +317,7 @@ ou :
     "categorie": "Citadine",
     "nbPlaces": 4,
     "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
-    "statutVehicule": "EN_SERVICE"
+    "statutVehicule": "EN_SERVICE",
+    "id": null
 }
 ```

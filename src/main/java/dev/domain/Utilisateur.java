@@ -28,11 +28,11 @@ public class Utilisateur {
     
     protected String matricule;
     
-    protected String categoriePermis;
+    protected String categoriePermis = "";
     
     protected String photUrl;
     
-    protected String telephone;
+    protected String telephone = "";
 
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     protected List<RoleUtilisateur> roles;

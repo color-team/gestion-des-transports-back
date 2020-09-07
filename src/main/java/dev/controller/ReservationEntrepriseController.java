@@ -1,7 +1,6 @@
 package dev.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,21 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.controller.dto.CodeErreur;
 import dev.controller.dto.MessageErreurDto;
-import dev.controller.dto.ReservationSansChauffeurDto;
+import dev.controller.dto.ReservationEntrepriseDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
-import dev.domain.ReservationSansChauffeur;
-import dev.domain.VehiculeEntreprise;
 import dev.exception.ReservationCovoiturageInvalideException;
-import dev.service.ReservationSansChauffeurService;
+import dev.service.ReservationEntrepriseService;
 
 @RestController
 @RequestMapping("/reservation-entreprise")
 @Secured("ROLE_COLLABORATEUR")
-public class ReservationSansChauffeurController {
+public class ReservationEntrepriseController {
 	
-	protected ReservationSansChauffeurService service;
+	protected ReservationEntrepriseService service;
 
-	public ReservationSansChauffeurController( ReservationSansChauffeurService service) {
+	public ReservationEntrepriseController( ReservationEntrepriseService service) {
 		super();
 		this.service = service;
 	}
@@ -41,7 +38,7 @@ public class ReservationSansChauffeurController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> create( @RequestBody @Valid ReservationSansChauffeurDto reservationDto,
+	public ResponseEntity<?> create( @RequestBody @Valid ReservationEntrepriseDto reservationDto,
 			BindingResult result) {
 		if ( result.hasErrors()) {
 			throw new ReservationCovoiturageInvalideException(

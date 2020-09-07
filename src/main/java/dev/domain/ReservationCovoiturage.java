@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import dev.domain.enumeration.StatutReservationCovoiturageEnum;
 
@@ -26,6 +27,9 @@ public class ReservationCovoiturage extends Reservation {
 	
 	@OneToMany(mappedBy = "reservationCovoiturage")
 	protected List<ReservationCovoituragePassager> reservationsCovoituragePassagers = new ArrayList<>();
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	protected StatutAnnonceCovoiturage statutAnnonceCovoiturage;
 
 	public ReservationCovoiturage() {}
 	
@@ -43,6 +47,24 @@ public class ReservationCovoiturage extends Reservation {
 		this.conducteur = conducteur;
 	}
 
+	public ReservationCovoiturage(
+			LocalDateTime dateDepart,
+			Localisation depart,
+			Localisation destination,
+			Utilisateur conducteur,
+			byte nbPassagers,
+			VehiculeParticulier vehiculeParticulier,
+			List<ReservationCovoituragePassager> reservationsCovoituragePassagers,
+			StatutAnnonceCovoiturage statutAnnonceCovoiturage
+		) {
+		super(dateDepart, depart, destination);
+		this.nbPlacesPassagers = nbPassagers;
+		this.vehiculeParticulier = vehiculeParticulier;
+		this.conducteur = conducteur;
+		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
+		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
+	}
+	
 	public ReservationCovoiturage(
 			LocalDateTime dateDepart,
 			Localisation depart,
@@ -97,5 +119,13 @@ public class ReservationCovoiturage extends Reservation {
 
 	public void setReservationsCovoituragePassagers(List<ReservationCovoituragePassager> reservationsCovoituragePassagers) {
 		this.reservationsCovoituragePassagers = reservationsCovoituragePassagers;
+	}
+
+	public StatutAnnonceCovoiturage getStatutAnnonceCovoiturage() {
+		return statutAnnonceCovoiturage;
+	}
+
+	public void setStatutAnnonceCovoiturage(StatutAnnonceCovoiturage statutAnnonceCovoiturage) {
+		this.statutAnnonceCovoiturage = statutAnnonceCovoiturage;
 	}
 }

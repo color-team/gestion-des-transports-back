@@ -28,7 +28,7 @@ public class ReservationCovoiturageMapper {
 				reservationCovoiturage.getConducteur().getInfos(), reservationCovoiturage.getNbPlacesDisponibles());
 	}
 
-	public ReservationCovoiturageDto ReservationCovoituragePassagerToDto(
+	public ReservationCovoiturageDto ReservationCovoituragePassagerToDto (
 			ReservationCovoituragePassager reservationCovoituragePassager) {
 		return new ReservationCovoiturageDto(reservationCovoituragePassager.getReservationCovoiturage().getDateDepart(),
 				reservationCovoituragePassager.getReservationCovoiturage().getDepart().getAdresse(),
@@ -36,7 +36,10 @@ public class ReservationCovoiturageMapper {
 				reservationCovoituragePassager.getStatutReservationCovoiturage().getStatutReservationCovoiturage()
 						.name(),
 				reservationCovoituragePassager.getReservationCovoiturage().getVehiculeParticulier().getInfos(),
-				reservationCovoituragePassager.getReservationCovoiturage().getConducteur().getInfos());
+				reservationCovoituragePassager.getReservationCovoiturage().getConducteur().getInfos(),
+				reservationCovoituragePassager.getReservationCovoiturage().getStatutAnnonceCovoiturage().getStatutAnnonceCovoiturage().name(),
+				reservationCovoituragePassager.getReservationCovoiturage().getId()
+				);
 	}
 
 	public ReservationCovoiturage fromDto(AnnonceCovoiturageCreerDto annonce, Utilisateur conducteur) {

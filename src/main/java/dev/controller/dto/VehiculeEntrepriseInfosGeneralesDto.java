@@ -25,10 +25,12 @@ public class VehiculeEntrepriseInfosGeneralesDto {
     
     protected String statutVehicule;
     
+    protected Long id;
+    
     public VehiculeEntrepriseInfosGeneralesDto() {}
 
 	public VehiculeEntrepriseInfosGeneralesDto(String immatriculation, String marque, String modele, String categorie, int nbPlaces,
-			String photoUrl, String statutVehicule) {
+			String photoUrl, String statutVehicule, Long id) {
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.modele = modele;
@@ -36,6 +38,7 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 		this.nbPlaces = nbPlaces;
 		this.photoUrl = photoUrl;
 		this.statutVehicule = statutVehicule;
+		this.id = id;
 	}
 	
 	public VehiculeEntrepriseInfosGeneralesDto(VehiculeEntreprise vehiculeEntreprise) {
@@ -51,6 +54,7 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 		} else {
 			this.statutVehicule = "EN_SERVICE";
 		}
+		this.id = vehiculeEntreprise.getId();
 	}
 
 	public String getImmatriculation() {
@@ -107,5 +111,13 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 
 	public Integer getNbPlaces() {
 		return nbPlaces;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
