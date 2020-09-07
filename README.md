@@ -340,3 +340,23 @@ ou :
     "statutReservation": "ANNULEE"
 }
 ```
+
+
+* PATCH /reservations-covoiturage/conducteur
+-   Annuler l'annonce d'un covoiturage dont l'id est passé dans le body d'un utilisateur connecté (en tant que conducteur de l'annonce)
+
+-   Request :
+```
+{
+    "id": 5,
+    "statutReservation": "PUBLIEE"
+}
+```
+
+-   Response :
+```
+{
+    "id": 5,
+    "statutReservation": "ANNULEE_PAR_CONDUCTEUR"
+}
+```
