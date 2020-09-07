@@ -4,7 +4,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import dev.controller.dto.DispoResrvationSansChauffeurDto;
+import dev.controller.dto.DispoResrvationEntrepriseDto;
+import dev.controller.dto.ReservationEntrepriseAffichageDto;
 import dev.controller.dto.ReservationEntrepriseDto;
 import dev.controller.dto.ReservationEntrepriseInfosDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
@@ -34,8 +35,8 @@ public class ReservationEntrepriseMapper {
 				);
 	}
 	
-	public DispoResrvationSansChauffeurDto toDispoDto( ReservationEntreprise reservation) {
-		return new DispoResrvationSansChauffeurDto(
+	public DispoResrvationEntrepriseDto toDispoDto( ReservationEntreprise reservation) {
+		return new DispoResrvationEntrepriseDto(
 				reservation.getId(),
 				reservation.getDateDepart(),
 				reservation.getDateArrivee(),
@@ -109,4 +110,36 @@ public class ReservationEntrepriseMapper {
 				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise().name(),
 				true);
 	}
+	
+	public ReservationEntrepriseAffichageDto avecChauffeurToAffichageDto( ReservationChauffeur reservation) {
+		String infosChauffeur = "";
+		
+		if ( reservation.getChauffeur() != null) {
+			infosChauffeur = reservation.getChauffeur().getInfos();
+		}
+		
+		return new ReservationEntrepriseAffichageDto(
+				infosChauffeur,
+				reservation.getDateDepart(),
+				reservation.getDateArrivee(),
+				reservation.getVehiculeEntreprise().getImmatriculation(),
+				reservation.getVehiculeEntreprise().getMarque(),
+				reservation.getVehiculeEntreprise().getModele(),
+				reservation.getId(),
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise());
+	}
+	
+	public ReservationEntrepriseAffichageDto sansChauffeurToAffichageDto( ReservationSansChauffeur reservation) {
+		
+		return new ReservationEntrepriseAffichageDto(
+				"",
+				reservation.getDateDepart(),
+				reservation.getDateArrivee(),
+				reservation.getVehiculeEntreprise().getImmatriculation(),
+				reservation.getVehiculeEntreprise().getMarque(),
+				reservation.getVehiculeEntreprise().getModele(),
+				reservation.getId(),
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise());
+	}
+	
 }

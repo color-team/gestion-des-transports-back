@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.ReservationCovoiturageDto;
+import dev.controller.dto.ReservationEntrepriseAffichageDto;
 import dev.controller.dto.ReservationEntrepriseDto;
 import dev.controller.dto.ReservationEntrepriseInfosDto;
 import dev.controller.dto.VehiculeSansChauffeurDto;
@@ -69,5 +71,18 @@ public class ReservationEntrepriseService {
 			resaSansChauffeurRepo.save( reservation);
 			return mapper.sansChauffeurtoInfosDto( reservation);
 		}
-	}	
+	}
+	
+	public List<ReservationEntrepriseAffichageDto> findByUtilisateurMatricule( String matricule) {
+		List<ReservationEntrepriseAffichageDto> reservations = resaAvecChauffeurRepo.findByPassagerMatricule( matricule)
+				.stream().map( reservation -> mapper.avecChauffeurToAffichageDto( reservation))
+				.collect( Collectors.toList());
+		
+		reservations.addAll( resaSansChauffeurRepo.findByConducteurMatricule( matricule).stream()
+		.map( reservation -> mapper.sansChauffeurToAffichageDto( reservation))
+		.collect( Collectors.toList()));
+		
+		return reservations;
+	}
+	
 }

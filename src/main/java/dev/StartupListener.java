@@ -30,14 +30,18 @@ public class StartupListener {
     private UtilisateurRepo utilisateurRepo;
     private ReservationCovoiturageRepository reservationCovoiturageRepository;
     private ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository;
-    private ReservationSansChauffeurRepository reservationSansChauffeurRepo; 
+    private ReservationSansChauffeurRepository reservationSansChauffeurRepo;
+    private ReservationChauffeurRepository reservationChauffeurRepo;
     private VehiculeEntrepriseRepository vehiculeEntrepriseRepo; 
 
 
-    public StartupListener( @Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder,
+	public StartupListener( @Value("${app.version}") String appVersion, VersionRepo versionRepo, PasswordEncoder passwordEncoder,
 			UtilisateurRepo utilisateurRepo, ReservationCovoiturageRepository reservationCovoiturageRepository,
 			ReservationCovoituragePassagerRepository reservationCovoituragePassagerRepository,
-			ReservationSansChauffeurRepository reservationSansChauffeurRepo) {
+			ReservationSansChauffeurRepository reservationSansChauffeurRepo,
+			ReservationChauffeurRepository reservationChauffeurRepo,
+			VehiculeEntrepriseRepository vehiculeEntrepriseRepo) {
+		super();
 		this.appVersion = appVersion;
 		this.versionRepo = versionRepo;
 		this.passwordEncoder = passwordEncoder;
@@ -45,8 +49,9 @@ public class StartupListener {
 		this.reservationCovoiturageRepository = reservationCovoiturageRepository;
 		this.reservationCovoituragePassagerRepository = reservationCovoituragePassagerRepository;
 		this.reservationSansChauffeurRepo = reservationSansChauffeurRepo;
+		this.reservationChauffeurRepo = reservationChauffeurRepo;
+		this.vehiculeEntrepriseRepo = vehiculeEntrepriseRepo;
 	}
-
 
 
 	@EventListener(ContextRefreshedEvent.class)
@@ -272,13 +277,55 @@ public class StartupListener {
         ReservationSansChauffeur reservationSansChauffeur2 = new ReservationSansChauffeur(
         		LocalDateTime.of( 2020, 12, 10, 8, 0, 0),
         		LocalDateTime.of( 2020, 12, 19, 20, 0, 0),
-    			null, null, user8, vehiculeEntreprise2, statut2);
+    			null, null, user7, vehiculeEntreprise2, statut2);
         
         statut2.setReservationEntreprise(reservationSansChauffeur2);
         reservationSansChauffeur2.setStatutReservationEntreprise(statut2);
         vehiculeEntreprise2.addReservationEntreprise(reservationSansChauffeur2);
         reservationSansChauffeur2.setVehiculeEntreprise(vehiculeEntreprise2);
         this.reservationSansChauffeurRepo.save( reservationSansChauffeur2);
+        
+        // Création Reservation avec chauffeurs
+        StatutReservationEntreprise statut3 = new StatutReservationEntreprise();
+        statut3.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ACCEPTEE);
+        ReservationChauffeur reservationChauffeur1 = new ReservationChauffeur(
+        		LocalDateTime.of( 2020, 11, 1, 8, 0, 0), null, null, user3,
+        		LocalDateTime.of( 2020, 11, 1, 12, 0, 0), vehiculeEntreprise1,
+    			statut3, user7);
+        
+        statut3.setReservationEntreprise(reservationChauffeur1);
+        reservationChauffeur1.setStatutReservationEntreprise(statut3);
+        vehiculeEntreprise1.addReservationEntreprise(reservationChauffeur1);
+        reservationChauffeur1.setVehiculeEntreprise(vehiculeEntreprise1);
+        this.reservationChauffeurRepo.save( reservationChauffeur1);
+        
+        
+        StatutReservationEntreprise statut4 = new StatutReservationEntreprise();
+        statut3.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ANNULEE);
+        ReservationChauffeur reservationChauffeur2 = new ReservationChauffeur(
+        		LocalDateTime.of( 2020, 11, 1, 14, 0, 0), null, null, user3,
+        		LocalDateTime.of( 2020, 11, 1, 18, 0, 0), vehiculeEntreprise1,
+    			statut4, user7);
+        
+        statut4.setReservationEntreprise(reservationChauffeur2);
+        reservationChauffeur2.setStatutReservationEntreprise(statut4);
+        vehiculeEntreprise1.addReservationEntreprise(reservationChauffeur2);
+        reservationChauffeur2.setVehiculeEntreprise(vehiculeEntreprise1);
+        this.reservationChauffeurRepo.save( reservationChauffeur2);
+        
+        StatutReservationEntreprise statut5 = new StatutReservationEntreprise();
+        statut3.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE);
+        ReservationChauffeur reservationChauffeur3 = new ReservationChauffeur(
+        		LocalDateTime.of( 2020, 11, 1, 19, 0, 0), null, null, null,
+        		LocalDateTime.of( 2020, 11, 1, 22, 0, 0), vehiculeEntreprise1,
+    			statut5, user7);
+        
+        statut5.setReservationEntreprise(reservationChauffeur3);
+        reservationChauffeur3.setStatutReservationEntreprise(statut5);
+        vehiculeEntreprise1.addReservationEntreprise(reservationChauffeur3);
+        reservationChauffeur3.setVehiculeEntreprise(vehiculeEntreprise1);
+        this.reservationChauffeurRepo.save( reservationChauffeur3);
+        
     }
 
 }

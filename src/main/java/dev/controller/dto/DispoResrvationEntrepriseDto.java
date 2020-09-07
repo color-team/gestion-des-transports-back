@@ -2,7 +2,7 @@ package dev.controller.dto;
 
 import java.time.LocalDateTime;
 
-public class DispoResrvationSansChauffeurDto {
+public class DispoResrvationEntrepriseDto {
 	
 	protected Long id;
 	
@@ -12,9 +12,9 @@ public class DispoResrvationSansChauffeurDto {
 	
 	protected String statutReservation;
 	
-	public DispoResrvationSansChauffeurDto() {}
+	public DispoResrvationEntrepriseDto() {}
 
-	public DispoResrvationSansChauffeurDto(Long id, LocalDateTime dateDepart, LocalDateTime dateArrivee,
+	public DispoResrvationEntrepriseDto(Long id, LocalDateTime dateDepart, LocalDateTime dateArrivee,
 			String statutReservation) {
 		super();
 		this.id = id;

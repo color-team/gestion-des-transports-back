@@ -18,12 +18,12 @@ public class VehiculeSansChauffeurDto {
     
     protected String statutVehicule;
     
-    protected List<DispoResrvationSansChauffeurDto> dispoReservation;
+    protected List<DispoResrvationEntrepriseDto> dispoReservation;
     
     public VehiculeSansChauffeurDto() {}
 
 	public VehiculeSansChauffeurDto(Long id, String immatriculation, String marque, String modele, String photoUrl,
-			String categorie, String statutVehicule, List<DispoResrvationSansChauffeurDto> dispoReservation) {
+			String categorie, String statutVehicule, List<DispoResrvationEntrepriseDto> dispoReservation) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -91,11 +91,11 @@ public class VehiculeSansChauffeurDto {
 		this.statutVehicule = statutVehicule;
 	}
 
-	public List<DispoResrvationSansChauffeurDto> getDispoReservation() {
+	public List<DispoResrvationEntrepriseDto> getDispoReservation() {
 		return dispoReservation;
 	}
 
-	public void setDispoReservation(List<DispoResrvationSansChauffeurDto> dispoReservation) {
+	public void setDispoReservation(List<DispoResrvationEntrepriseDto> dispoReservation) {
 		this.dispoReservation = dispoReservation;
 	}
 
