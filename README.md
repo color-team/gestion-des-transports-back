@@ -321,3 +321,22 @@ ou :
     "id": null
 }
 ```
+
+* PATCH /reservations-covoiturage
+-   Annuler la réservation d'un covoiturage dont l'id est passé dans le body d'un utilisateur connecté
+
+-   Request :
+```
+{
+    "id": 5,
+    "statutReservation": "DEMANDEE"
+}
+```
+
+-   Response :
+```
+{
+    "id": 5,
+    "statutReservation": "ANNULEE"
+}
+```
