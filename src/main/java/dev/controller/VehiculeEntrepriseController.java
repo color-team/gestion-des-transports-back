@@ -8,11 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import dev.controller.dto.AnnonceCovoiturageCreerDto;
 import dev.controller.dto.CodeErreur;
@@ -28,11 +24,11 @@ import dev.service.VehiculeEntrepriseService;
 @Secured("ROLE_ADMINISTRATEUR")
 public class VehiculeEntrepriseController {
 
-	protected VehiculeEntrepriseService service;
+	protected VehiculeEntrepriseService vehiculeEntrepriseService;
 
-	public VehiculeEntrepriseController(VehiculeEntrepriseService service) {
+	public VehiculeEntrepriseController(VehiculeEntrepriseService vehiculeEntrepriseService) {
 		super();
-		this.service = service;
+		this.vehiculeEntrepriseService = vehiculeEntrepriseService;
 	}
 
 	// GET /vehicules-entreprise
@@ -43,7 +39,18 @@ public class VehiculeEntrepriseController {
 	 */
 	@GetMapping
 	public ResponseEntity<List<VehiculeEntrepriseInfosGeneralesDto>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(vehiculeEntrepriseService.findAll());
+	}
+
+	// GET /vehicules-entreprise/{vehicleEntrepriseId}
+	/**
+	 * Lister tous les véhicules
+	 *
+	 * @return
+	 */
+	@GetMapping(value = "/{vehicleEntrepriseId}")
+	public ResponseEntity<VehiculeEntrepriseInfosGeneralesDto> findOne(@PathVariable String vehicleEntrepriseId) {
+		return ResponseEntity.status(HttpStatus.OK).body(vehiculeEntrepriseService.findOne(Long.parseLong(vehicleEntrepriseId)));
 	}
 
 	
@@ -51,7 +58,7 @@ public class VehiculeEntrepriseController {
 	/**
 	 * Créer un véhicule de service avec le statut EN_SERVICE
 	 * 
-	 * @param VehiculeEntrepriseInfosGeneralesDto
+	 * @param vehiculeEntrepriseInfosGeneralesDto
 	 * @param result
 	 * @return
 	 */
@@ -63,7 +70,7 @@ public class VehiculeEntrepriseController {
 					new MessageErreurDto(CodeErreur.VALIDATION, "Les champs doivent être tous remplis"));
 		}
 
-		return ResponseEntity.status(HttpStatus.OK).body(service.create(vehiculeEntrepriseInfosGeneralesDto));
+		return ResponseEntity.status(HttpStatus.OK).body(vehiculeEntrepriseService.create(vehiculeEntrepriseInfosGeneralesDto));
 	}
 
 
