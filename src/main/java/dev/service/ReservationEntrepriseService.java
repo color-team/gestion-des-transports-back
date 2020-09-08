@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.AcceptationChauffeurDto;
+import dev.controller.dto.ReservationChauffeurPlanningDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.controller.dto.ReservationEntrepriseAffichageDto;
 import dev.controller.dto.ReservationEntrepriseDto;
@@ -15,8 +17,10 @@ import dev.controller.dto.VehiculeSansChauffeurDto;
 import dev.controller.mapper.ReservationEntrepriseMapper;
 import dev.domain.ReservationChauffeur;
 import dev.domain.ReservationSansChauffeur;
+import dev.domain.StatutReservationEntreprise;
 import dev.domain.Utilisateur;
 import dev.domain.VehiculeEntreprise;
+import dev.domain.enumeration.StatutReservationEntrepriseEnum;
 import dev.repository.ReservationChauffeurRepository;
 import dev.repository.ReservationSansChauffeurRepository;
 import dev.repository.UtilisateurRepo;
@@ -83,6 +87,32 @@ public class ReservationEntrepriseService {
 		.collect( Collectors.toList()));
 		
 		return reservations;
+	}
+	
+	public List<ReservationChauffeurPlanningDto> findByChauffeur( String matricule) {
+		return resaAvecChauffeurRepo.findByChauffeurMatricule( matricule)
+				.stream().map( reservation -> mapper.avecChauffeurToPlanningDto( reservation))
+				.collect( Collectors.toList());
+	}
+	
+	@Transactional
+	public ReservationEntrepriseAffichageDto acceptReservation( AcceptationChauffeurDto acceptation) {
+		Utilisateur chauffeur = utilisateurRepo.findByMatricule( acceptation.getChauffeurMatricule()).get(0);
+		ReservationChauffeur reservation = resaAvecChauffeurRepo.getOne( acceptation.getReservationId());
+		VehiculeEntreprise vehicule = reservation.getVehiculeEntreprise();
+		StatutReservationEntreprise statut = new StatutReservationEntreprise(
+				reservation, StatutReservationEntrepriseEnum.ACCEPTEE);
+		
+		chauffeur.addReservationChauffeur( reservation);
+		vehicule.addReservationEntreprise( reservation);
+		
+		reservation.setStatutReservationEntreprise( statut);
+		reservation.setChauffeur( chauffeur);
+		reservation.setVehiculeEntreprise( vehicule);
+		
+		resaAvecChauffeurRepo.save( reservation);
+		
+		return mapper.avecChauffeurToAffichageDto( reservation);
 	}
 	
 }
