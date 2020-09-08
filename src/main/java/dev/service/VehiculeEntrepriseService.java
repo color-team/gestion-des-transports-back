@@ -48,4 +48,13 @@ public class VehiculeEntrepriseService {
 		return vehiculeEntrepriseInfosGeneralesDto;
 	}
 
+	@Transactional
+	public VehiculeEntrepriseInfosGeneralesDto update(
+			VehiculeEntrepriseInfosGeneralesDto vehiculeEntrepriseInfosGeneralesDto) {
+		vehiculeEntrepriseRepo.save(vehiculeEntrepriseInfosGeneralesMapper
+				.vehiculeEntrepriseInfosGeneralesDtoToVehiculeEntreprise(vehiculeEntrepriseInfosGeneralesDto));
+
+		return vehiculeEntrepriseInfosGeneralesDto;
+	}
+
 }
