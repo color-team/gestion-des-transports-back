@@ -120,6 +120,7 @@ public class StartupListener {
         user7.setNom( "User7");
         user7.setPrenom( "DEV");
         user7.setEmail( "user7@dev.fr");
+        user7.setTelephone( "0630431973");
         user7.setMotDePasse( passwordEncoder.encode( "superpass"));
         user7.setRoles( Arrays.asList( new RoleUtilisateur( user7, Role.ROLE_COLLABORATEUR)));
         user7.setMatricule( "US-666-07-BK");
@@ -343,7 +344,7 @@ public class StartupListener {
         
         
         StatutReservationEntreprise statut4 = new StatutReservationEntreprise();
-        statut3.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ANNULEE);
+        statut4.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ANNULEE);
         ReservationChauffeur reservationChauffeur2 = new ReservationChauffeur( 
         		LocalDateTime.of( 2020, 11, 1, 14, 0, 0), null, null, user3,
         		LocalDateTime.of( 2020, 11, 1, 18, 0, 0), vehiculeEntreprise1,
@@ -356,7 +357,7 @@ public class StartupListener {
         this.reservationChauffeurRepo.save( reservationChauffeur2);
         
         StatutReservationEntreprise statut5 = new StatutReservationEntreprise();
-        statut3.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE);
+        statut5.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE);
         ReservationChauffeur reservationChauffeur3 = new ReservationChauffeur( 
         		LocalDateTime.of( 2020, 11, 1, 19, 0, 0), null, null, null,
         		LocalDateTime.of( 2020, 11, 1, 22, 0, 0), vehiculeEntreprise1,

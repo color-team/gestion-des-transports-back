@@ -50,7 +50,7 @@ public class ReservationEntrepriseController {
 		return ResponseEntity.ok( service.findByChauffeur( matricule));
 	}
 	
-	@PostMapping
+	@PostMapping("/chauffeur")
 	public ResponseEntity<?> acceptReservation( @RequestBody @Valid AcceptationChauffeurDto acceptation,
 			BindingResult result) {
 		if ( result.hasErrors()) {

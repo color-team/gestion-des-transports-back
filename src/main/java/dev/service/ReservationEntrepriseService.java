@@ -90,25 +90,31 @@ public class ReservationEntrepriseService {
 	}
 	
 	public List<ReservationChauffeurPlanningDto> findByChauffeur( String matricule) {
-		return resaAvecChauffeurRepo.findByChauffeurMatricule( matricule)
+		List<ReservationChauffeurPlanningDto> reservations =  resaAvecChauffeurRepo.findByChauffeurMatricule( matricule)
 				.stream().map( reservation -> mapper.avecChauffeurToPlanningDto( reservation))
 				.collect( Collectors.toList());
+		
+		reservations.addAll( resaAvecChauffeurRepo.findByStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE)
+				.stream().map( reservation -> mapper.avecChauffeurToPlanningDto( reservation))
+				.collect( Collectors.toList()));
+		
+		return reservations;
 	}
 	
 	@Transactional
 	public ReservationEntrepriseAffichageDto acceptReservation( AcceptationChauffeurDto acceptation) {
-		Utilisateur chauffeur = utilisateurRepo.findByMatricule( acceptation.getChauffeurMatricule()).get(0);
 		ReservationChauffeur reservation = resaAvecChauffeurRepo.getOne( acceptation.getReservationId());
+		Utilisateur chauffeur = utilisateurRepo.findByMatricule( acceptation.getChauffeurMatricule()).get(0);
 		VehiculeEntreprise vehicule = reservation.getVehiculeEntreprise();
-		StatutReservationEntreprise statut = new StatutReservationEntreprise(
-				reservation, StatutReservationEntrepriseEnum.ACCEPTEE);
+		StatutReservationEntreprise statut = reservation.getStatutReservationEntreprise();
 		
 		chauffeur.addReservationChauffeur( reservation);
 		vehicule.addReservationEntreprise( reservation);
+		statut.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ACCEPTEE);
 		
-		reservation.setStatutReservationEntreprise( statut);
 		reservation.setChauffeur( chauffeur);
 		reservation.setVehiculeEntreprise( vehicule);
+		reservation.setStatutReservationEntreprise( statut);
 		
 		resaAvecChauffeurRepo.save( reservation);
 		
