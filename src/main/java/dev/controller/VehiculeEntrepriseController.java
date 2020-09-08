@@ -44,7 +44,7 @@ public class VehiculeEntrepriseController {
 
 	// GET /vehicules-entreprise/{vehicleEntrepriseId}
 	/**
-	 * Lister tous les véhicules
+	 * Récupérer détails d'un véhicule
 	 *
 	 * @return
 	 */
