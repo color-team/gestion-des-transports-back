@@ -14,7 +14,7 @@ public class VehiculeEntreprise extends Vehicule {
 
 	protected byte nbPlaces;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	protected Localisation localisation;
 	
 	@OneToMany(mappedBy = "vehiculeEntreprise")

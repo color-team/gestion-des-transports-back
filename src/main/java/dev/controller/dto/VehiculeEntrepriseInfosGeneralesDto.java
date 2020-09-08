@@ -27,6 +27,10 @@ public class VehiculeEntrepriseInfosGeneralesDto {
     
     protected Long id;
     
+    protected Float longitude;
+    
+    protected Float latitude;
+    
     public VehiculeEntrepriseInfosGeneralesDto() {}
 
 	public VehiculeEntrepriseInfosGeneralesDto(String immatriculation, String marque, String modele, String categorie, int nbPlaces,
@@ -55,6 +59,11 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 			this.statutVehicule = "EN_SERVICE";
 		}
 		this.id = vehiculeEntreprise.getId();
+		
+		if ( vehiculeEntreprise.getLocalisation() != null ) {
+			this.longitude = vehiculeEntreprise.getLocalisation().getLongitude();
+			this.latitude = vehiculeEntreprise.getLocalisation().getLatitude();
+		}
 	}
 
 	public String getImmatriculation() {
@@ -119,5 +128,21 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(float longitude) {
+		this.longitude = longitude;
+	}
+
+	public float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(float latitude) {
+		this.latitude = latitude;
 	}
 }
