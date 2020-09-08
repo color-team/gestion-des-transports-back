@@ -291,23 +291,23 @@ public class StartupListener {
         byte nbPlaces = 4;
         VehiculeEntreprise vehiculeEntreprise1 = new VehiculeEntreprise( "PRO-000-01", "Fiat", 
         		"https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg", 
-        		null, "Multipla", "Citadine", nbPlaces, new Localisation( "Place de la République, Paris", "Paris", 75000, 48.8534f , 2.3414f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Multipla", "Citadines polyvalentes", nbPlaces, new Localisation( "Place de la République, Paris", "Paris", 75000, 48.8534f , 2.3414f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
        
         
         VehiculeEntreprise vehiculeEntreprise2 = new VehiculeEntreprise( "PRO-000-02", "Mercedes", 
         		"https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg", 
-        		null, "Cla", "Coupé", nbPlaces, new Localisation( "Porte d'Italie, Paris", "Paris", 75000, 48.8922f , 2.3988f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Cla", "Berlines Taille M", nbPlaces, new Localisation( "Porte d'Italie, Paris", "Paris", 75000, 48.8922f , 2.3988f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
         VehiculeEntreprise vehiculeEntreprise3 = new VehiculeEntreprise( "PRO-000-03", "Oui-oui Mobile", 
         		"https://images-na.ssl-images-amazon.com/images/I/81X1gJAZliL._AC_SY355_.jpg", 
-        		null, "Pipi", "Coupé", nbPlaces, new Localisation( "Porte des Enfers, Paris", "Paris", 75000, 48.8032f , 2.2481f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Sport", "Citadines polyvalentes", nbPlaces, new Localisation( "Porte des Enfers, Paris", "Paris", 75000, 48.8032f , 2.2481f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
         VehiculeEntreprise vehiculeEntreprise4 = new VehiculeEntreprise( "PRO-000-04", "Batmobile", 
         		"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9fJcx0hzX5S-YVBSBBtZLpy1GMpA8wuYIvw&usqp=CAU", 
-        		null, "Caca", "Coupé", nbPlaces, new Localisation( "Porte du Paradis, Paris", "Paris", 75000, 48.8536f , 2.4484f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Sport", "Compactes", nbPlaces, new Localisation( "Porte du Paradis, Paris", "Paris", 75000, 48.8536f , 2.4484f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
         vehiculeEntrepriseRepo.save(vehiculeEntreprise3);
