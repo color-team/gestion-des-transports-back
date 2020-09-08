@@ -4,6 +4,9 @@ import javax.validation.constraints.NotNull;
 
 import dev.domain.VehiculeEntreprise;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VehiculeEntrepriseInfosGeneralesDto {
 	
 	@NotNull
@@ -24,6 +27,8 @@ public class VehiculeEntrepriseInfosGeneralesDto {
     protected String photoUrl;
     
     protected String statutVehicule;
+
+    protected List<ReservationEntrepriseDto> reservationsEntreprise = new ArrayList<>();
     
     protected Long id;
     
@@ -52,7 +57,10 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 		this.categorie = vehiculeEntreprise.getCategorie();
 		this.nbPlaces = (int) vehiculeEntreprise.getNbPlaces();
 		this.photoUrl = vehiculeEntreprise.getPhotoUrl();
-		
+		vehiculeEntreprise.getReservationsEntreprise().forEach(reservationEntreprise -> {
+			this.reservationsEntreprise.add(new ReservationEntrepriseDto(reservationEntreprise));
+		});
+
 		if ( vehiculeEntreprise.getStatutVehicule() != null ) {
 			this.statutVehicule = vehiculeEntreprise.getStatutVehicule().getStatutVehicule().name();
 		} else {

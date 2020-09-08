@@ -1,5 +1,7 @@
 package dev.controller.dto;
 
+import dev.domain.ReservationEntreprise;
+
 import java.time.LocalDateTime;
 
 public class ReservationEntrepriseDto {
@@ -18,12 +20,16 @@ public class ReservationEntrepriseDto {
 
 	public ReservationEntrepriseDto(String reservant, LocalDateTime dateDepart, LocalDateTime dateArrivee,
 			Long vehiculeId, boolean avecChauffeur) {
-		super();
 		this.reservant = reservant;
 		this.dateDepart = dateDepart;
 		this.dateArrivee = dateArrivee;
 		this.vehiculeId = vehiculeId;
 		this.avecChauffeur = avecChauffeur;
+	}
+
+	public ReservationEntrepriseDto(ReservationEntreprise reservationEntreprise) {
+		this.dateDepart = reservationEntreprise.getDateDepart();
+		this.dateArrivee = reservationEntreprise.getDateArrivee();
 	}
 
 	public String getReservant() {

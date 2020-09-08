@@ -34,6 +34,10 @@ public class VehiculeEntrepriseService {
 				.collect(Collectors.toList());
 	}
 
+	public VehiculeEntrepriseInfosGeneralesDto findOne(Long idVehiculeEntreprise) {
+		return new VehiculeEntrepriseInfosGeneralesDto(vehiculeEntrepriseRepo.findById(idVehiculeEntreprise).get());
+	}
+
 	@Transactional
 	public VehiculeEntrepriseInfosGeneralesDto create(
 			VehiculeEntrepriseInfosGeneralesDto vehiculeEntrepriseInfosGeneralesDto) {
