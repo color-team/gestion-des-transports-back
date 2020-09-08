@@ -73,5 +73,10 @@ public class VehiculeEntrepriseController {
 		return ResponseEntity.status(HttpStatus.OK).body(vehiculeEntrepriseService.create(vehiculeEntrepriseInfosGeneralesDto));
 	}
 
+	@PutMapping
+	public ResponseEntity<?> update(@RequestBody @Valid VehiculeEntrepriseInfosGeneralesDto vehiculeEntrepriseInfosGeneralesDto) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(vehiculeEntrepriseService.update(vehiculeEntrepriseInfosGeneralesDto));
+	}
 
 }
