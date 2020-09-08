@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+
+  transports-db:
+    build: ./transports-db
+    image: transports-db
+    container_name: transports-db
+    networks:
+      - transports-network
+    volumes:
+      - transports-data:/var/lib/mysql
+ 
+
+  transports-back:
+    image: transports-back
+    build: .
+    container_name: transports-back
+    depends_on:
+      - transports-db
+    ports:
+      - "8081:8080"
+    networks:
+      - transports-network
+
+networks:
+  transports-network:
+
+volumes:
+  transports-data:
