@@ -248,6 +248,30 @@ https://gestion-des-transports-back.herokuapp.com/
 ```
 [
     {
+        "immatriculation": "PRO-000-03",
+        "marque": "Oui-oui Mobile",
+        "modele": "Pipi",
+        "categorie": "CoupÃ©",
+        "nbPlaces": 4,
+        "photoUrl": "https://images-na.ssl-images-amazon.com/images/I/81X1gJAZliL._AC_SY355_.jpg",
+        "statutVehicule": "EN_SERVICE",
+        "id": 1,
+        "longitude": 2.3481,
+        "latitude": 48.8532
+    },
+    {
+        "immatriculation": "PRO-000-04",
+        "marque": "Batmobile",
+        "modele": "Caca",
+        "categorie": "CoupÃ©",
+        "nbPlaces": 4,
+        "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9fJcx0hzX5S-YVBSBBtZLpy1GMpA8wuYIvw&usqp=CAU",
+        "statutVehicule": "EN_SERVICE",
+        "id": 2,
+        "longitude": 2.3484,
+        "latitude": 48.8536
+    },
+    {
         "immatriculation": "PRO-000-01",
         "marque": "Fiat",
         "modele": "Multipla",
@@ -255,7 +279,9 @@ https://gestion-des-transports-back.herokuapp.com/
         "nbPlaces": 4,
         "photoUrl": "https://s1.cdn.autoevolution.com/images/gallery/FIATMultipla-2416_1.jpg",
         "statutVehicule": "EN_SERVICE",
-        "id": 1
+        "id": 3,
+        "longitude": 2.3414,
+        "latitude": 48.8534
     },
     {
         "immatriculation": "PRO-000-02",
@@ -265,17 +291,9 @@ https://gestion-des-transports-back.herokuapp.com/
         "nbPlaces": 4,
         "photoUrl": "https://i.ytimg.com/vi/HD-vr3x9raU/maxresdefault.jpg",
         "statutVehicule": "EN_SERVICE",
-        "id": 2
-    },
-    {
-        "immatriculation": "PRO-000-03",
-        "marque": "Simca",
-        "modele": "Simca 1000",
-        "categorie": "Citadine",
-        "nbPlaces": 4,
-        "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/1963_Simca_1000.jpg",
-        "statutVehicule": "EN_SERVICE",
-        "id": 3
+        "id": 4,
+        "longitude": 2.3488,
+        "latitude": 48.8522
     }
 ]
 ```
