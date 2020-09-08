@@ -153,4 +153,12 @@ public class VehiculeEntrepriseInfosGeneralesDto {
 	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
+
+	public List<ReservationEntrepriseDto> getReservationsEntreprise() {
+		return reservationsEntreprise;
+	}
+
+	public void setReservationsEntreprise(List<ReservationEntrepriseDto> reservationsEntreprise) {
+		this.reservationsEntreprise = reservationsEntreprise;
+	}
 }
