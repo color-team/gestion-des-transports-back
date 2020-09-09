@@ -14,7 +14,7 @@ public class ReservationChauffeurPlanningDto {
 	
 	private String telPassager;
 	
-	private String imatriculation;
+	private String immatriculation;
 	
 	private StatutReservationEntrepriseEnum statut;
 	
@@ -23,13 +23,13 @@ public class ReservationChauffeurPlanningDto {
 	public ReservationChauffeurPlanningDto() {}
 
 	public ReservationChauffeurPlanningDto(LocalDateTime dateDebut, LocalDateTime dateFin, String infosPassager,
-			String telPassager, String imatriculation, StatutReservationEntrepriseEnum statut, Long reservationId) {
+			String telPassager, String immatriculation, StatutReservationEntrepriseEnum statut, Long reservationId) {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.infosPassager = infosPassager;
 		this.telPassager = telPassager;
-		this.imatriculation = imatriculation;
+		this.immatriculation = immatriculation;
 		this.statut = statut;
 		this.reservationId = reservationId;
 	}
@@ -66,12 +66,12 @@ public class ReservationChauffeurPlanningDto {
 		this.telPassager = telPassager;
 	}
 
-	public String getImatriculation() {
-		return imatriculation;
+	public String getImmatriculation() {
+		return immatriculation;
 	}
 
-	public void setImatriculation(String imatriculation) {
-		this.imatriculation = imatriculation;
+	public void setImmatriculation(String immatriculation) {
+		this.immatriculation = immatriculation;
 	}
 
 	public StatutReservationEntrepriseEnum getStatut() {
