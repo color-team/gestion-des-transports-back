@@ -301,14 +301,14 @@ public class StartupListener {
         		null, "Cla", "Berlines Taille M", nbPlaces, new Localisation( "Porte d'Italie, Paris", "Paris", 75000, 48.8922f , 2.3988f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
-        VehiculeEntreprise vehiculeEntreprise3 = new VehiculeEntreprise( "PRO-000-03", "Oui-oui Mobile", 
+        VehiculeEntreprise vehiculeEntreprise3 = new VehiculeEntreprise( "PRO-000-03", "Jouet Club", 
         		"https://images-na.ssl-images-amazon.com/images/I/81X1gJAZliL._AC_SY355_.jpg", 
-        		null, "Sport", "Citadines polyvalentes", nbPlaces, new Localisation( "Porte des Enfers, Paris", "Paris", 75000, 48.8032f , 2.2481f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Oui-oui Mobile", "Citadines polyvalentes", nbPlaces, new Localisation( "Porte des Enfers, Paris", "Paris", 75000, 48.8032f , 2.2481f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
-        VehiculeEntreprise vehiculeEntreprise4 = new VehiculeEntreprise( "PRO-000-04", "Batmobile", 
+        VehiculeEntreprise vehiculeEntreprise4 = new VehiculeEntreprise( "PRO-000-04", "Wayne Corporation", 
         		"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9fJcx0hzX5S-YVBSBBtZLpy1GMpA8wuYIvw&usqp=CAU", 
-        		null, "Sport", "Compactes", nbPlaces, new Localisation( "Porte du Paradis, Paris", "Paris", 75000, 48.8536f , 2.4484f), new ArrayList<ReservationEntreprise>(), 
+        		null, "Batmobile", "Compactes", nbPlaces, new Localisation( "Porte du Paradis, Paris", "Paris", 75000, 48.8536f , 2.4484f), new ArrayList<ReservationEntreprise>(), 
         		new StatutVehicule( null, StatutVehiculeEnum.EN_SERVICE));
         
         vehiculeEntrepriseRepo.save(vehiculeEntreprise3);
