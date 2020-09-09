@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import dev.controller.dto.DispoResrvationEntrepriseDto;
+import dev.controller.dto.ReservationChauffeurPlanningDto;
 import dev.controller.dto.ReservationEntrepriseAffichageDto;
 import dev.controller.dto.ReservationEntrepriseDto;
 import dev.controller.dto.ReservationEntrepriseInfosDto;
@@ -140,6 +141,17 @@ public class ReservationEntrepriseMapper {
 				reservation.getVehiculeEntreprise().getModele(),
 				reservation.getId(),
 				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise());
+	}
+	
+	public ReservationChauffeurPlanningDto avecChauffeurToPlanningDto( ReservationChauffeur reservation) {
+		return new ReservationChauffeurPlanningDto(
+				reservation.getDateDepart(),
+				reservation.getDateArrivee(),
+				reservation.getPassager().getInfos(),
+				reservation.getPassager().getTelephone(),
+				reservation.getVehiculeEntreprise().getImmatriculation(),
+				reservation.getStatutReservationEntreprise().getStatutReservationEntreprise(),
+				reservation.getId());
 	}
 	
 }

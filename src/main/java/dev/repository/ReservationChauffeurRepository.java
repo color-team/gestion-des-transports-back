@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import dev.domain.ReservationChauffeur;
+import dev.domain.enumeration.StatutReservationEntrepriseEnum;
 
 public interface ReservationChauffeurRepository extends JpaRepository<ReservationChauffeur, Long> {
 
@@ -18,5 +19,10 @@ public interface ReservationChauffeurRepository extends JpaRepository<Reservatio
 	List<ReservationChauffeur> findByChauffeurMatricule(@Param("matricule") String matricule);
 
 	List<ReservationChauffeur> findByDateDepartAfter(LocalDateTime now);
+	
+	@Query("select r from ReservationChauffeur r join r.statutReservationEntreprise s where "
+			+ "s.statutReservationEntreprise = :statut")
+	List<ReservationChauffeur> findByStatutReservationEntreprise(
+			@Param("statut") StatutReservationEntrepriseEnum statut);
 	
 }

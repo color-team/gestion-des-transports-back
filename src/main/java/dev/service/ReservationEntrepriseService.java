@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import dev.controller.dto.AcceptationChauffeurDto;
+import dev.controller.dto.ReservationChauffeurPlanningDto;
 import dev.controller.dto.ReservationCovoiturageDto;
 import dev.controller.dto.ReservationEntrepriseAffichageDto;
 import dev.controller.dto.ReservationEntrepriseDto;
@@ -15,8 +17,10 @@ import dev.controller.dto.VehiculeSansChauffeurDto;
 import dev.controller.mapper.ReservationEntrepriseMapper;
 import dev.domain.ReservationChauffeur;
 import dev.domain.ReservationSansChauffeur;
+import dev.domain.StatutReservationEntreprise;
 import dev.domain.Utilisateur;
 import dev.domain.VehiculeEntreprise;
+import dev.domain.enumeration.StatutReservationEntrepriseEnum;
 import dev.repository.ReservationChauffeurRepository;
 import dev.repository.ReservationSansChauffeurRepository;
 import dev.repository.UtilisateurRepo;
@@ -83,6 +87,38 @@ public class ReservationEntrepriseService {
 		.collect( Collectors.toList()));
 		
 		return reservations;
+	}
+	
+	public List<ReservationChauffeurPlanningDto> findByChauffeur( String matricule) {
+		List<ReservationChauffeurPlanningDto> reservations =  resaAvecChauffeurRepo.findByChauffeurMatricule( matricule)
+				.stream().map( reservation -> mapper.avecChauffeurToPlanningDto( reservation))
+				.collect( Collectors.toList());
+		
+		reservations.addAll( resaAvecChauffeurRepo.findByStatutReservationEntreprise( StatutReservationEntrepriseEnum.EN_ATTENTE)
+				.stream().map( reservation -> mapper.avecChauffeurToPlanningDto( reservation))
+				.collect( Collectors.toList()));
+		
+		return reservations;
+	}
+	
+	@Transactional
+	public ReservationEntrepriseAffichageDto acceptReservation( AcceptationChauffeurDto acceptation) {
+		ReservationChauffeur reservation = resaAvecChauffeurRepo.getOne( acceptation.getReservationId());
+		Utilisateur chauffeur = utilisateurRepo.findByMatricule( acceptation.getChauffeurMatricule()).get(0);
+		VehiculeEntreprise vehicule = reservation.getVehiculeEntreprise();
+		StatutReservationEntreprise statut = reservation.getStatutReservationEntreprise();
+		
+		chauffeur.addReservationChauffeur( reservation);
+		vehicule.addReservationEntreprise( reservation);
+		statut.setStatutReservationEntreprise( StatutReservationEntrepriseEnum.ACCEPTEE);
+		
+		reservation.setChauffeur( chauffeur);
+		reservation.setVehiculeEntreprise( vehicule);
+		reservation.setStatutReservationEntreprise( statut);
+		
+		resaAvecChauffeurRepo.save( reservation);
+		
+		return mapper.avecChauffeurToAffichageDto( reservation);
 	}
 	
 }

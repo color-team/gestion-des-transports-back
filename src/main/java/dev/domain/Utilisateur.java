@@ -216,6 +216,10 @@ public class Utilisateur {
 	public void setReservationsChauffeur(List<ReservationChauffeur> reservationsChauffeur) {
 		this.reservationsChauffeur = reservationsChauffeur;
 	}
+	
+	public void addReservationChauffeur( ReservationChauffeur reservationsChauffeur) {
+		this.reservationsChauffeur.add(reservationsChauffeur);
+	}
 
 	public List<ReservationSansChauffeur> getReservationsSansChauffeur() {
 		return reservationsSansChauffeur;
