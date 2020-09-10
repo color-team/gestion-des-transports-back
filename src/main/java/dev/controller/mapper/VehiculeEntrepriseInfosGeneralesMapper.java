@@ -28,5 +28,4 @@ public class VehiculeEntrepriseInfosGeneralesMapper {
 				new StatutVehicule(null, StatutVehiculeEnum.valueOf(vehiculeEntrepriseInfosGeneralesDto.getStatutVehicule()))
 		);
 	}
-
 }

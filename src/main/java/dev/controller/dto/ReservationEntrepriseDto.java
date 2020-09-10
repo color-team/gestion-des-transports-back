@@ -1,6 +1,7 @@
 package dev.controller.dto;
 
 import dev.domain.ReservationEntreprise;
+import dev.domain.ReservationSansChauffeur;
 
 import java.time.LocalDateTime;
 
@@ -31,6 +32,12 @@ public class ReservationEntrepriseDto {
 		this.dateDepart = reservationEntreprise.getDateDepart();
 		this.dateArrivee = reservationEntreprise.getDateArrivee();
 	}
+
+/*	public ReservationEntrepriseDto(ReservationSansChauffeur reservation) {
+		this.dateDepart = reservation.getDateDepart();
+		this.dateArrivee = reservation.getDateArrivee();
+		this.reservant = reservation.getConducteur().getInfos();
+	}*/
 
 	public String getReservant() {
 		return reservant;

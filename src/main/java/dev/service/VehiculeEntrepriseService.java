@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import dev.domain.StatutVehicule;
+import dev.domain.VehiculeEntreprise;
+import dev.domain.enumeration.StatutVehiculeEnum;
 import org.springframework.stereotype.Service;
 
 import dev.controller.dto.VehiculeEntrepriseInfosGeneralesDto;
@@ -50,11 +53,24 @@ public class VehiculeEntrepriseService {
 
 	@Transactional
 	public VehiculeEntrepriseInfosGeneralesDto update(
-			VehiculeEntrepriseInfosGeneralesDto vehiculeEntrepriseInfosGeneralesDto) {
-		vehiculeEntrepriseRepo.save(vehiculeEntrepriseInfosGeneralesMapper
-				.vehiculeEntrepriseInfosGeneralesDtoToVehiculeEntreprise(vehiculeEntrepriseInfosGeneralesDto));
+			VehiculeEntrepriseInfosGeneralesDto vehiculeDto) {
+		VehiculeEntreprise vehicule = vehiculeEntrepriseRepo.getOne( vehiculeDto.getId());
+		StatutVehicule statut = vehicule.getStatutVehicule();
+		switch ( vehiculeDto.getStatutVehicule()) {
+			case "EN REPARATION":
+				statut.setStatutVehicule(StatutVehiculeEnum.EN_REPARATION);
+				break;
+			case "EN SERVICE":
+				statut.setStatutVehicule(StatutVehiculeEnum.EN_SERVICE);
+				break;
+			case "HORS SERVICE":
+				statut.setStatutVehicule(StatutVehiculeEnum.HORS_SERVICE);
+				break;
+		}
+		vehicule.setStatutVehicule( statut);
+		vehiculeEntrepriseRepo.save( vehicule);
 
-		return vehiculeEntrepriseInfosGeneralesDto;
+		return vehiculeDto;
 	}
 
 }
