@@ -110,9 +110,9 @@
 			</dependencies>
 		</profile>
 		<profile>
-			<id>dev-mysql</id>
+			<id>prod</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<jdbc.driver>org.postgresql.Driver</jdbc.driver>
@@ -134,20 +134,20 @@
 			</dependencies>
 		</profile>
 		<profile>
-			<id>prod</id>
+			<id>dev</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
 
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
-				<jdbc.url>jdbc:mysql://${env.MYSQL_ADDON_HOST}:${env.MYSQL_ADDON_PORT}/${env.MYSQL_ADDON_DB}</jdbc.url>
-				<jdbc.user>${env.MYSQL_ADDON_USER}</jdbc.user>
-				<jdbc.pass>${env.MYSQL_ADDON_PASSWORD}</jdbc.pass>
-				<jpa.hibernate.ddl>${env.HIBERNATE_DDL}</jpa.hibernate.ddl>
+				<jdbc.url>jdbc:mysql://localhost:3306/transports-db-dev?serverTimezone=UTC#</jdbc.url>
+				<jdbc.user>root</jdbc.user>
+				<jdbc.pass></jdbc.pass>
+				<jpa.hibernate.ddl>create-drop</jpa.hibernate.ddl>
 				<jdbc.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</jdbc.dialect>
 				<jdbc.connections.max.active>2</jdbc.connections.max.active>
-				<app.version>${env.COMMIT_ID}</app.version>
+<!-- 				<app.version>${env.COMMIT_ID}</app.version> -->
 
 			</properties>
 			<dependencies>
